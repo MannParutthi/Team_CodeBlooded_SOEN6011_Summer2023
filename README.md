@@ -11,7 +11,7 @@ The following are the categories of main users:
 ## Team Members
 1. Manan Paruthi (MannParutthi) - 40192620
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
-2. Ashwin Raghunath (ashraghunath) - 40 
+2. Ashwin Raghunath (ashraghunath) - 40192120
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 3. Nipun Hedaoo (nipunh) - 40
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
