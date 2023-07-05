@@ -9,12 +9,18 @@ The following are the categories of main users:
 3. Admin – Managing all user profiles, postings and tracking
 
 ## Team Members
-1. Manan Paruthi - 40192620
-2. Ashwin Raghunath - 
-3. Nipun Hedaoo - 
-4. Jwalit Shah - 40227541
-5. Dinesh Kini - 
-6. Anagha Harinath - 
+1. Manan Paruthi (MannParutthi) - 40192620
+   <br/> Role & Strengths - Full Stack Developer & Angular, Sprintboot, SQL
+2. Ashwin Raghunath (ashraghunath) - 40 
+   <br/> Role & Strengths - Full Stack Developer & Angular, Sprintboot, SQL
+3. Nipun Hedaoo (nipunh) - 40
+   <br/> Role & Strengths - Full Stack Developer & Angular, Sprintboot, SQL
+4. Jwalit Shah (jwalit21) - 40227541
+   <br/> Role & Strengths - Full Stack Developer & Angular, Sprintboot, SQL
+5. Dinesh Kini (dinesh-07) - 40
+   <br/> Role & Strengths - Full Stack Developer & Angular, Sprintboot, SQL
+6. Anagha Harinath - 40
+   <br/> Role & Strengths - Full Stack Developer & Angular, Sprintboot, SQL
 
 ## Project Approach & Technology
 --- To be added ---
