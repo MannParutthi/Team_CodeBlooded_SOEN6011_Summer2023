@@ -13,7 +13,7 @@ The following are the categories of main users:
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 2. Ashwin Raghunath (ashraghunath) - 40192120
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
-3. Nipun Hedaoo (nipunh) - 40
+3. Nipun Hedaoo (nipunh) - 40165942
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 4. Jwalit Shah (jwalit21) - 40227541
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
