@@ -17,7 +17,7 @@ The following are the categories of main users:
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 4. Jwalit Shah (jwalit21) - 40227541
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
-5. Dinesh Kini (dinesh-07) - 40
+5. Dinesh Kini (dinesh-07) - 40231799
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 6. Anagha Harinath - 40
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
