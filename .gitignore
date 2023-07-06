@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+career-service-backend/mvnw.cmd
+career-service-backend/mvnw
 
 ### IntelliJ IDEA ###
 .idea
