@@ -1,0 +1,40 @@
+<div class="container">
+  <form [formGroup]="employeeProfileForm">
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Enter first name">
+      <mat-error *ngIf="employeeProfileForm.controls['firstName'].invalid && employeeProfileForm.controls['firstName'].touched">
+        First Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Enter last name">
+      <mat-error *ngIf="employeeProfileForm.controls['lastName'].invalid && employeeProfileForm.controls['lastName'].touched">
+        Last Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter email">
+      <mat-error *ngIf="employeeProfileForm.controls['email'].invalid && employeeProfileForm.controls['email'].touched">
+        <span *ngIf="employeeProfileForm.get('email')?.errors?.['required']">Email is required</span>
+        <span *ngIf="employeeProfileForm.get('email')?.errors?.['email']">Invalid email format</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phoneNumber" placeholder="Enter phone number">
+      <mat-error *ngIf="employeeProfileForm.controls['phoneNumber'].invalid && employeeProfileForm.controls['phoneNumber'].touched">
+        Phone number should contain only digits
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="createProfile()" [disabled]="employeeProfileForm.invalid">
+      Save
+    </button>
+  </form>
+</div>
