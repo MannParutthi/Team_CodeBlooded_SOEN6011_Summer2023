@@ -25,7 +25,7 @@ The following are the categories of main users:
 ## 3. Project Approach & Technology
 * Frontend - Angular
 * Backend - Springboot
-* Database - SQL
+* Database - MongoDB
 * Documentation - GitHub Wiki
 
 ### System architecture
