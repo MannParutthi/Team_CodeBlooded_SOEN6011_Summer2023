@@ -10,17 +10,17 @@ The following are the categories of main users:
 
 ## 2. Team Members
 1. Manan Paruthi (MannParutthi) - 40192620
-   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
+   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 2. Ashwin Raghunath (ashraghunath) - 40192120
-   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
+   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 3. Nipun Hedaoo (nipunh) - 40165942
-   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
+   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 4. Jwalit Shah (jwalit21) - 40227541
-   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
+   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 5. Dinesh Kini (dinesh-07) - 40231799
-   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
+   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 6. Anagha Harinath - 40224578
-   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
+   <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 
 ## 3. Project Approach & Technology
 * Frontend - Angular
