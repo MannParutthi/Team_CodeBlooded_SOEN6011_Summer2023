@@ -19,7 +19,7 @@ The following are the categories of main users:
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 5. Dinesh Kini (dinesh-07) - 40231799
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
-6. Anagha Harinath - 40
+6. Anagha Harinath - 40224578
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, SQL
 
 ## 3. Project Approach & Technology
