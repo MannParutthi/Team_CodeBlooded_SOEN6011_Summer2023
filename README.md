@@ -27,3 +27,6 @@ The following are the categories of main users:
 * Backend - Springboot
 * Database - SQL
 * Documentation - GitHub Wiki
+
+![arch](https://github.com/ashraghunath/AWS-serverless-resume-website/assets/42038573/d73e2588-e3fc-4b15-b67d-c2c76bc62bf5)
+
