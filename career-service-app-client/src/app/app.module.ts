@@ -14,17 +14,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { BrowseJobsComponent } from './browse-jobs/browse-jobs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
+    BrowseJobsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatSidenavModule,
     MatTableModule,
     MatListModule,
+    MatCardModule,
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
