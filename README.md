@@ -30,5 +30,6 @@ The following are the categories of main users:
 
 ### System architecture
 
-![arch](https://github.com/ashraghunath/AWS-serverless-resume-website/assets/42038573/d73e2588-e3fc-4b15-b67d-c2c76bc62bf5)
+![arch](https://github.com/MannParutthi/Team_CodeBlooded_SOEN6011_Summer2023/assets/42038573/f93a1296-fd96-4846-9c25-a1fa7337c180)
+
 
