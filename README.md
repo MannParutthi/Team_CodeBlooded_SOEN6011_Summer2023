@@ -29,7 +29,7 @@ web applications. Its intuitive and straightforward design makes it a great choi
 allows us to deliver an engaging and user-friendly experience.
 
 * Backend - Springboot <br>
-Spring Boot is a great fit due to its ability to expedite development within the short timeframe. It simplifies setup and configuration, allowing us to focus on building core features. We can easily integrate necessary functionalities such as user registration, login, job posting, and application tracking. Spring Boot's security features provide a solid foundation for protecting user data. Additionally, its scalability and performance optimizations ensure that your platform can handle a growing user base.
+Spring Boot is a great fit due to its ability to expedite development within the short timeframe. It simplifies setup and configuration, allowing us to focus on building core features. Additionally Spring Boot's security features provide a solid foundation for protecting user data. 
 
 * Database - MongoDB <br>
 By using MongoDB, we will benefit from its flexible data model, which allows
