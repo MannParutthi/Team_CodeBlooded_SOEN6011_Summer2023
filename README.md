@@ -23,13 +23,26 @@ The following are the categories of main users:
    <br/> Role - Full Stack Developer & Strengths - Angular, Sprintboot, MongoDB
 
 ## 3. Project Approach & Technology
-* Frontend - Angular
-* Backend - Springboot
-* Database - MongoDB
-* Documentation - GitHub Wiki
+* Frontend - Angular <br>
+We chose Angular for its ability to simplify the development process while providing high-performing and dynamic
+web applications. Its intuitive and straightforward design makes it a great choice for our project. This versatility
+allows us to deliver an engaging and user-friendly experience.
+
+* Backend - Springboot <br>
+Spring Boot is a great fit due to its ability to expedite development within the short timeframe. It simplifies setup and configuration, allowing us to focus on building core features. We can easily integrate necessary functionalities such as user registration, login, job posting, and application tracking. Spring Boot's security features provide a solid foundation for protecting user data. Additionally, its scalability and performance optimizations ensure that your platform can handle a growing user base.
+
+* Database - MongoDB <br>
+By using MongoDB, we will benefit from its flexible data model, which allows
+us to store and manage data in a way that makes sense for our specific use case. MongoDB also provides ease
+of use, with a simple and intuitive interface that makes it easy to interact with the data. Additionally, MongoDB's 
+compatibility with Spring Boot, allows for seamless integration with our application, improving overall efficiency
+and performance.
+
+* Documentation - GitHub Wiki <br>
+We will use Github Wiki since it is easily accessible and conveniently located within your project repository hence allowing for seamless navigation and quick access to project documentation. 
 
 ### System architecture
 
-![arch](https://github.com/MannParutthi/Team_CodeBlooded_SOEN6011_Summer2023/assets/42038573/f93a1296-fd96-4846-9c25-a1fa7337c180)
+![a](https://github.com/MannParutthi/Team_CodeBlooded_SOEN6011_Summer2023/assets/42038573/67b4aa2d-a16c-45c9-a154-28aafc78d65e)
 
 
