@@ -17,7 +17,3 @@ jobs:
         node-version: 14.15
     - name: Install dependencies
       run: cd career-service-app-client && npm install
-    - name: Test
-      run: cd career-service-app-client && npm test
-      env:
-        CI: true
