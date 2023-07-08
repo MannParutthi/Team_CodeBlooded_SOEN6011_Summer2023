@@ -1,4 +1,4 @@
-name: Java
+name: Spring Boot JUnit Test cases
 
 on:
   push:
