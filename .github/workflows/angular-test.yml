@@ -19,3 +19,5 @@ jobs:
       run: cd career-service-app-client && npm install
     - name: Test
       run: cd career-service-app-client && npm test
+      env:
+        CI: true
