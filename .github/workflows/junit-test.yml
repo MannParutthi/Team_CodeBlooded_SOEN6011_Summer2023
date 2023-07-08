@@ -19,8 +19,5 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Build
-        run:  cd career-service-backend && mvn --batch-mode -DskipTests package
-
       - name: Test
         run:  cd career-service-backend && mvn --batch-mode -Dmaven.test.failure.ignore=true test
