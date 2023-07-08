@@ -18,4 +18,4 @@ jobs:
     - name: Install dependencies
       run: cd career-service-app-client && npm install
     - name: Test
-      run: cd career-service-app-client && npm test
+      run: cd career-service-app-client && ng test
