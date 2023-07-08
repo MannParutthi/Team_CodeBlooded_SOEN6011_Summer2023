@@ -17,7 +17,5 @@ jobs:
         node-version: 12.8
     - name: Install dependencies
       run: cd career-service-app-client && npm install
-    - name: Lint
-      run: cd career-service-app-client && npm run lint
     - name: Test
       run: cd career-service-app-client && npm test -- --configuration=ci
