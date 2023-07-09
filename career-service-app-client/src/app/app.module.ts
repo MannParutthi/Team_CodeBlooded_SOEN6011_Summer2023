@@ -23,6 +23,8 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BrowseJobsComponent } from './browse-jobs/browse-jobs.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
+import { BrowseCandidatesComponent } from './browse-candidates/browse-candidates.component';
+import { AddJobPostingComponent } from './add-job-posting/add-job-posting.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
     HomePageComponent,
     BrowseJobsComponent,
     CreateProfileComponent,
+    BrowseCandidatesComponent,
+    AddJobPostingComponent,
   ],
   imports: [
     BrowserModule,
