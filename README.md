@@ -10,23 +10,23 @@ The following are the categories of main users:
 
 ## 2. Team Members
 1. Manan Paruthi (MannParutthi) - 40192620
-   <br/> Role - Frontend Developer
-   <br/> Strengths - Angular
+   <br/> Role - Implementation Manager and Frontend Developer
+   <br/> Strengths - Angular, Springboot
 2. Ashwin Raghunath (ashraghunath) - 40192120
    <br/> Role - Architect and Backend Developer
    <br/> Strengths - Sprint Boot, Security and Cloud
 3. Nipun Hedaoo (nipunh) - 40165942
-   <br/> Role - Frontend Developer
-   <br/> Strengths - Angular
+   <br/> Role - Support Mananger and Frontend Developer 
+   <br/> Strengths - Angular, MongoDB
 4. Jwalit Shah (jwalit21) - 40227541
-   <br/> Role - Backend Stack Developer
-   <br/> Strengths - Sprintboot
+   <br/> Role - Quality Analyst and Frontend Developer
+   <br/> Strengths - Angular, Sprintboot
 6. Dinesh Kini (dinesh-07) - 40231799
-   <br/> Role - Automation and QA
+   <br/> Role - DevOps and Backend Developer
    <br/> Strengths - MongoDB, JUnit, Github action CI/CD
 8. Anagha Harinath - 40224578
-   <br/> Role - Scrum Master
-   <br/> Strengths - Angular
+   <br/> Role - Scrum Master and Backend Developer
+   <br/> Strengths - Angular, MongoDB
 
 ## 3. Project Approach & Technology
 * Frontend - Angular <br>
