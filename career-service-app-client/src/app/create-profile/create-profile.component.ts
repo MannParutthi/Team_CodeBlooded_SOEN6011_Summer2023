@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-employee-profile',
-  templateUrl: './create-employee-profile.component.html',
-  styleUrls: ['./create-employee-profile.component.scss']
+  selector: 'app-create-profile',
+  templateUrl: './create-profile.component.html',
+  styleUrls: ['./create-profile.component.scss']
 })
-export class CreateEmployeeProfileComponent implements OnInit {
+export class CreateProfileComponent implements OnInit {
 
-  employeeProfileForm: FormGroup = this.formBuilder.group({
+  profileForm: FormGroup = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -21,8 +21,8 @@ export class CreateEmployeeProfileComponent implements OnInit {
   }
 
   createProfile() {
-    if (this.employeeProfileForm.valid) {
-      console.log(this.employeeProfileForm.value);
+    if (this.profileForm.valid) {
+      console.log(this.profileForm.value);
       // Perform further actions (e.g., save to backend)
     }
   }

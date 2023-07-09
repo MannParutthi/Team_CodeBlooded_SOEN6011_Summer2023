@@ -22,16 +22,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BrowseJobsComponent } from './browse-jobs/browse-jobs.component';
-import { CreateEmployeeProfileComponent } from './create-employee-profile/create-employee-profile.component';
-import { CreateEmployerProfileComponent } from './create-employer-profile/create-employer-profile.component';
+import { CreateProfileComponent } from './create-profile/create-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     BrowseJobsComponent,
-    CreateEmployeeProfileComponent,
-    CreateEmployerProfileComponent,
+    CreateProfileComponent,
   ],
   imports: [
     BrowserModule,
