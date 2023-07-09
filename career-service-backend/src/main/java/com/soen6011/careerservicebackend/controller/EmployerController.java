@@ -1,15 +1,14 @@
 package com.soen6011.careerservicebackend.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/carrers")
-public class CarrerController {
+@RequestMapping("/employer")
+public class EmployerController {
 
-    public static Boolean getCarrers() {
+    //TODO: For CICD test - will be deleted
+    public static Boolean getEmployers() {
         return Boolean.TRUE;
     }
 
