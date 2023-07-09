@@ -24,7 +24,7 @@ The primary users and the features they are offered are mentioned below:
 6. Dinesh Kini (dinesh-07) - 40231799
    <br/> Role - DevOps and Backend Developer
    <br/> Strengths - Spring Boot, JUnit, Github action CI/CD
-8. Anagha Harinath - 40224578
+8. Anagha Harinath (Anagha630) - 40224578
    <br/> Role - Scrum Master and Backend Developer
    <br/> Strengths - Spring Boot, MongoDB
 
