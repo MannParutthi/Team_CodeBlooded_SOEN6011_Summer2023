@@ -35,7 +35,10 @@ web applications. Its intuitive and straightforward design makes it a great choi
 allows us to deliver an engaging and user-friendly experience.
 
 * Backend - Springboot <br>
-Spring Boot is a great fit due to its ability to expedite development within a short timeframe. It simplifies setup and configuration, allowing us to focus on building core features. Additionally, Spring Boot's security features provide a solid foundation for protecting user data. 
+Spring Boot is a great fit due to its ability to expedite development within a short timeframe. It simplifies setup and configuration, allowing us to focus on building core features. Additionally, Spring Boot's security features provide a solid foundation for protecting user data.
+
+* Authentication & Authorization - In Springboot - with Bearer JWT Token <br>
+Authentication and Authorization using JWT. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token. To achieve this, packages for JWT tokens are available in Spring boot and that can be used to achieve the goal.
 
 * Database - MongoDB <br>
 By using MongoDB, we will benefit from its flexible data model, which allows
