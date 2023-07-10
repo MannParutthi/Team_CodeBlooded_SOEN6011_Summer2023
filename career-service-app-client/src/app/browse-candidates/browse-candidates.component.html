@@ -1,0 +1,22 @@
+<div class="container">
+
+  <div *ngFor="let candidate of candidatesList">
+    <mat-card class="candidate-card">
+      <mat-card-content>
+        <div class="candidate-name">{{ candidate.name }}</div>
+        <div class="candidate-email">{{ candidate.email }}</div>
+        <div class="candidate-phone">{{ candidate.phone }}</div>
+        <div class="candidate-resume">
+          <a href="{{ candidate.resume }}" target="_blank">Resume</a>
+        </div>
+        <div class="candidate-cover-letter">
+          <a href="{{ candidate.coverLetter }}" target="_blank">Cover Letter</a>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="inviteCandidate(candidate.candidateId)">Invite</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>
