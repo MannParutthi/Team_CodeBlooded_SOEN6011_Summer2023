@@ -12,7 +12,7 @@ public class User {
     @Id
     private String userId;
     @Indexed(unique = true)
-    private String emailAddress;
+    private String emailId;
     private String password;
     private Authority authority;
 
