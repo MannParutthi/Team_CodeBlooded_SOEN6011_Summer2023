@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-browse-jobs',
@@ -64,13 +65,15 @@ export class BrowseJobsComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   applyToJob(jobId: number) {
     console.log('applyToJob() called with jobId: ' + jobId);
+    // if not resume
+    this.toastr.error('Please upload the resume first before applying to the job.');
   }
 
 }
