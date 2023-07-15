@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-browse-jobs',
-  templateUrl: './browse-jobs.component.html',
-  styleUrls: ['./browse-jobs.component.scss']
+  selector: 'app-applied-jobs',
+  templateUrl: './applied-jobs.component.html',
+  styleUrls: ['./applied-jobs.component.scss']
 })
-export class BrowseJobsComponent implements OnInit {
+export class AppliedJobsComponent implements OnInit {
 
   jobsList = [
     {
@@ -16,7 +15,8 @@ export class BrowseJobsComponent implements OnInit {
       location: 'Mountain View, CA',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
       date: '2 days ago',
-      salaryRange: '$100,000 - $120,000'
+      salaryRange: '$100,000 - $120,000',
+      status: 'Applied'
     },
     {
       jobId: 2,
@@ -25,7 +25,8 @@ export class BrowseJobsComponent implements OnInit {
       location: 'Menlo Park, CA',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
       date: '2 days ago',
-      salaryRange: '$100,000 - $120,000'
+      salaryRange: '$100,000 - $120,000',
+      status: 'Applied'
     },
     {
       jobId: 3,
@@ -34,7 +35,8 @@ export class BrowseJobsComponent implements OnInit {
       location: 'Cupertino, CA',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
       date: '2 days ago',
-      salaryRange: '$100,000 - $120,000'
+      salaryRange: '$100,000 - $120,000',
+      status: 'Applied'
     },
     {
       jobId: 4,
@@ -43,7 +45,8 @@ export class BrowseJobsComponent implements OnInit {
       location: 'Seattle, WA',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
       date: '2 days ago',
-      salaryRange: '$100,000 - $120,000'
+      salaryRange: '$100,000 - $120,000',
+      status: 'Applied'
     },
     {
       jobId: 5,
@@ -52,7 +55,8 @@ export class BrowseJobsComponent implements OnInit {
       location: 'Redmond, WA',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
       date: '2 days ago',
-      salaryRange: '$100,000 - $120,000'
+      salaryRange: '$100,000 - $120,000',
+      status: 'Applied'
     },
     {
       jobId: 6,
@@ -61,19 +65,14 @@ export class BrowseJobsComponent implements OnInit {
       location: 'Los Gatos, CA',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit.',
       date: '2 days ago',
-      salaryRange: '$100,000 - $120,000'
+      salaryRange: '$100,000 - $120,000',
+      status: 'Applied'
     }
   ]
 
-  constructor(private toastr: ToastrService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  applyToJob(jobId: number) {
-    console.log('applyToJob() called with jobId: ' + jobId);
-    // if not resume
-    this.toastr.error('Please upload the resume first before applying to the job.');
   }
 
 }
