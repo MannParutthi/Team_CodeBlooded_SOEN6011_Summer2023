@@ -32,10 +32,10 @@ export class UserLoginComponent implements OnInit {
     // Send a login request to the server with form data
     this.userLoginService.loginUser(this.formGroup.getRawValue(), this.authority).subscribe(
       (res) => {
-        this.loggedUser = {"emailId": "jwalitshah2q@gmail.com", "name": "jwalit"}; // Store the logged-in user data
-        localStorage.setItem("user", JSON.stringify(res)) // Store user data in local storage
+        localStorage.setItem("user", JSON.stringify(res.user)) // Store user data in local storage
         this.toastr.success('Login Successful', 'Welcome'); // Show success message using Toastr
         this._router.navigateByUrl('/home'); // Redirect to home page after successful login
+        window.location.reload()
       },
       (error) => {
         this.toastr.error('Incorrect username or password', 'Login Failed'); // Show error message using Toastr

@@ -23,7 +23,7 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     // Check if the user is already logged in, if so, navigate to the home page
-    if (localStorage.getItem('user') == null) {
+    if (localStorage.getItem('user') != null) {
       this._router.navigateByUrl('/home');
     }
   }
