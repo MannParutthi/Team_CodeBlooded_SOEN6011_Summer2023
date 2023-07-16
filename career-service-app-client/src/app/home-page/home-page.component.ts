@@ -26,4 +26,9 @@ export class HomePageComponent implements OnInit {
     this._router.navigateByUrl('/login');
   }
 
+  signup(authority: string) {
+    localStorage.setItem("authority", authority)
+    this._router.navigateByUrl('/signup');
+  }
+
 }

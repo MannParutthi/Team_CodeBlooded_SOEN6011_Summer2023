@@ -1,6 +1,6 @@
 <div class="container">
     <form [formGroup]="formGroup">
-        <h1>{{ authority }} User Login</h1>
+        <h1>{{ authority }} Login</h1>
         <div fxLayout="row" fxLayout.xs="column" class="form-fields">
             <mat-form-field appearance="outline" class="field">
                 <mat-label>Email</mat-label>
@@ -18,23 +18,12 @@
                 <button mat-raised-button color="primary" class="auth-button" (click)="loginUser()" id="loginUserBtn">
                     Login
                 </button>
-
                 <div class="button-spacing"></div>
-
-                <button mat-raised-button color="primary" class="auth-button" routerLink="/my-profile">
-                    Signup
-                </button>
-            </div>
-        </div>
-
-        <div class="button-container">
-            <div class="button-group">
                 <button mat-raised-button color="primary" class="auth-button" routerLink="/home">
                     Home
                 </button>
             </div>
         </div>
-
     </form>
     <br>
 </div>
