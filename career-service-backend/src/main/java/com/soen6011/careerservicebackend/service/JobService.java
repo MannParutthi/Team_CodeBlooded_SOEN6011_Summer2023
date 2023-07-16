@@ -43,6 +43,6 @@ public class JobService {
     }
     
     public Page<Job> getAllJobs(Pageable pageable) {
-    	return jobRepository.findAll(pageable);
+    	return  jobRepository.findAll(pageable);
     }
 }

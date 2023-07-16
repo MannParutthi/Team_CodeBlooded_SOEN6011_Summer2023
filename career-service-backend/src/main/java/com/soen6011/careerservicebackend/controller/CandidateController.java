@@ -82,8 +82,7 @@ public class CandidateController {
     }
     
     @GetMapping("/alljobs")
-    public ResponseEntity<Page<Job>> getAllJobs(@RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "10") Integer size) {
+    public ResponseEntity<Page<Job>> getAllJobs(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
     	Pageable pageable = PageRequest.of(page, size);
         Page<Job> jobs = jobService.getAllJobs(pageable);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
