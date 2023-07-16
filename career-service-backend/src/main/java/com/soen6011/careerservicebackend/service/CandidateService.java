@@ -8,10 +8,12 @@ import com.soen6011.careerservicebackend.model.Job;
 import com.soen6011.careerservicebackend.repository.ApplicationRepository;
 import com.soen6011.careerservicebackend.repository.CandidateRepository;
 import com.soen6011.careerservicebackend.repository.JobRepository;
+import com.soen6011.careerservicebackend.response.LoadFile;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CandidateService {
@@ -22,10 +24,13 @@ public class CandidateService {
 
     private final ApplicationRepository applicationRepository;
 
-    public CandidateService(CandidateRepository candidateRepository, JobRepository jobRepository, ApplicationRepository applicationRepository) {
+    private final FileService fileService;
+
+    public CandidateService(CandidateRepository candidateRepository, JobRepository jobRepository, ApplicationRepository applicationRepository, FileService fileService) {
         this.candidateRepository = candidateRepository;
         this.jobRepository = jobRepository;
         this.applicationRepository = applicationRepository;
+        this.fileService = fileService;
     }
 
     public List<Candidate> getCandidatesByIds(List<String> candidateIds) {
@@ -64,7 +69,18 @@ public class CandidateService {
     public boolean checkResumeExistence(String candidateId) {
         Candidate candidate = candidateRepository.findById(candidateId)
                 .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
-        return candidate.getResume() != null;
+        return candidate.getResumeId() != null;
     }
 
+    public LoadFile downloadCandidateResume(String candidateId) throws IOException {
+
+        Candidate candidate = candidateRepository.findById(candidateId)
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+
+        String resumeId = candidate.getResumeId();
+
+        LoadFile loadFile = fileService.downloadFile(resumeId);
+
+        return loadFile;
+    }
 }
