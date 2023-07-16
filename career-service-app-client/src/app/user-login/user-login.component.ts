@@ -23,7 +23,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
     // If user is already logged in, redirect to home page
     this.authority = localStorage.getItem("authority")
-    if (localStorage.getItem("user") != null || !this.authority) {
+    if (localStorage.getItem("user") != null || this.authority == null) {
       this._router.navigateByUrl('/home')
     }
   }
