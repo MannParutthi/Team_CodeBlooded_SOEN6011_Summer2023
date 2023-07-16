@@ -88,7 +88,20 @@ public class BaseService {
 
         if (authorityName.equals(Authority.ROLE_CANDIDATE)) {
 
-            //TODO: do same as employer for candidate
+            Candidate candidate = new Candidate();
+
+            candidate.setEmailId(userRequest.getEmailId());
+            candidate.setPassword(userRequest.getPassword());
+            candidate.setAuthority(userRequest.getAuthority());
+
+            Candidate candidateRequest = (Candidate) userRequest;
+            candidate.setFirstName(candidateRequest.getFirstName());
+            candidate.setLastName(candidateRequest.getLastName());
+            candidate.setEducation(candidateRequest.getEducation());
+            candidate.setSkills(candidateRequest.getSkills());
+            candidate.setExperience(candidateRequest.getExperience());
+
+            savedUser = candidateRepository.save(candidate);
 
         } else if (authorityName.equals(Authority.ROLE_EMPLOYER)) {
             Employer employer = new Employer();
