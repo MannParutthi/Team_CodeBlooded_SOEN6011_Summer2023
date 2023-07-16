@@ -104,4 +104,11 @@ public class CandidateController {
                 .body(new ByteArrayResource(loadFile.getFile()));
     }
 
+    @PostMapping("/{candidateId}/resume/upload")
+    public ResponseEntity<String> uploadResume(@PathVariable String candidateId,
+                                               @RequestParam("file") MultipartFile file) throws IOException {
+        candidateService.uploadCandidateResume(candidateId, file);
+        return new ResponseEntity<>("Resume uploaded successfully", HttpStatus.OK);
+    }
+
 }
