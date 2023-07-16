@@ -18,6 +18,7 @@ export class HomePageComponent implements OnInit {
     this.Authority = Authority;
     this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
     this.loggedUser = JSON.parse(this.loggedUser); // Parse the logged-in user data
+    localStorage.removeItem("authority")
   }
 
   login(authority: string) {

@@ -1,5 +1,5 @@
 export const Authority = {
-    "ADMIN": "admin",
-    "CANDIDATE": "candidate",
-    "EMPLOYER": "employer"
+    "ADMIN": "Admin",
+    "CANDIDATE": "Candidate",
+    "EMPLOYER": "Employer"
 };
