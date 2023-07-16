@@ -6,11 +6,13 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
 import { BrowseCandidatesComponent } from './browse-candidates/browse-candidates.component';
 import { AddJobPostingComponent } from './add-job-posting/add-job-posting.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { EmployerJobsComponent } from './employer-job-posting/employer-job-posting.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: "home", component: HomePageComponent },
   { path: "browse-job-postings", component: BrowseJobsComponent },
+  { path: "employer-job-posting", component: EmployerJobsComponent },
   { path: "my-profile", component: CreateProfileComponent },
   { path: "add-job-posting", component: AddJobPostingComponent },
   { path: "browse-candidates", component: BrowseCandidatesComponent },

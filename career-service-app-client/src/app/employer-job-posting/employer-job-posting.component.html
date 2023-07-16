@@ -1,0 +1,24 @@
+<div class="container">
+    <div *ngFor="let job of jobsList">
+      <mat-card class="job-posting" *ngIf="!error">
+        <mat-card-content>
+          <div class="job-title">{{ job.position }}</div>
+          <div class="job-company">{{ job.company }}</div>
+          <div class="job-location">{{ job.location }}</div>
+          <div class="job-description">{{ job.description }}</div>
+          <div class="job-description">{{ job.requirements }}</div>
+          <!-- <div class="job-date">{{ job.date }}</div> -->
+          <!-- <div class="job-salary">{{ job.salaryRange }}</div> -->
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="updateJob(job.id)">Update</button>
+          <button mat-raised-button color="primary" (click)="deleteJob(job.id)">Detele</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+    <div *ngIf="error">
+      <div class="alert alert-danger">{{error}}</div>
+    </div>
+  </div>
+  
