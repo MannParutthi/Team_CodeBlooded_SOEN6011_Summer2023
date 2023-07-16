@@ -41,4 +41,8 @@ public class JobService {
 
         jobRepository.save(existingJob);
     }
+    
+    public Page<Job> getAllJobs(Pageable pageable) {
+    	return jobRepository.findAll(pageable);
+    }
 }
