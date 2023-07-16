@@ -52,7 +52,7 @@ We will use Github Wiki since it is easily accessible and conveniently located w
 
 ### System architecture
 
-![a](https://github.com/MannParutthi/Team_CodeBlooded_SOEN6011_Summer2023/assets/42038573/67b4aa2d-a16c-45c9-a154-28aafc78d65e)
+![](System-Architecture.jpg)
 
 ### Github Action CI/CD
 
