@@ -98,7 +98,6 @@ public class BaseService {
             candidate.setFirstName(candidateRequest.getFirstName());
             candidate.setLastName(candidateRequest.getLastName());
             candidate.setEducation(candidateRequest.getEducation());
-            candidate.setSkills(candidateRequest.getSkills());
             candidate.setExperience(candidateRequest.getExperience());
 
             savedUser = candidateRepository.save(candidate);
