@@ -83,4 +83,14 @@ public class CandidateService {
 
         return loadFile;
     }
+
+    public void uploadCandidateResume(String candidateId, MultipartFile file) throws IOException {
+        Candidate candidate = candidateRepository.findById(candidateId)
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+
+        String resumeId = fileService.addFile(file);
+
+        candidate.setResumeId(resumeId);
+        candidateRepository.save(candidate);
+    }
 }
