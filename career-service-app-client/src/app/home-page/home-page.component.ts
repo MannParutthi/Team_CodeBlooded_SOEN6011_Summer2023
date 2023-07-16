@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  loggedUser: any; // Stores the logged-in user data
+
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
+    this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
+    this.loggedUser = JSON.parse(this.loggedUser); // Parse the logged-in user data
   }
 
 }

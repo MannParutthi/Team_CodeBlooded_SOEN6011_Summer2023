@@ -6,10 +6,12 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
 import { BrowseCandidatesComponent } from './browse-candidates/browse-candidates.component';
 import { AddJobPostingComponent } from './add-job-posting/add-job-posting.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: "home", component: HomePageComponent },
+  { path: "login", component: UserLoginComponent },
   { path: "browse-job-postings", component: BrowseJobsComponent },
   { path: "my-profile", component: CreateProfileComponent },
   { path: "add-job-posting", component: AddJobPostingComponent },
