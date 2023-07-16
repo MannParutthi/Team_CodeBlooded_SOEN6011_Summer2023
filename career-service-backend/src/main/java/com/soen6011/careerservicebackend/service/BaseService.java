@@ -10,6 +10,10 @@ import com.soen6011.careerservicebackend.repository.CandidateRepository;
 import com.soen6011.careerservicebackend.repository.EmployerRepository;
 import com.soen6011.careerservicebackend.request.LoginRequest;
 import com.soen6011.careerservicebackend.response.LoginResponse;
+import com.soen6011.careerservicebackend.security.JwTService;
+import com.soen6011.careerservicebackend.security.JwtUserDetailService;
+import com.soen6011.careerservicebackend.security.UserJWT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -19,13 +23,18 @@ import static com.soen6011.careerservicebackend.mapper.UserMapperFactory.getUser
 @Service
 public class BaseService {
 
-    private final CandidateRepository candidateRepository;
-    private final EmployerRepository employerRepository;
+    @Autowired
+    private CandidateRepository candidateRepository;
 
-    public BaseService(CandidateRepository candidateRepository, EmployerRepository employerRepository) {
-        this.candidateRepository = candidateRepository;
-        this.employerRepository = employerRepository;
-    }
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @Autowired
+    JwtUserDetailService userDetailsService;
+
+    @Autowired
+    JwTService jwtService;
+
 
     public LoginResponse login(LoginRequest request, Authority authorityName) {
         if (request == null) {
@@ -71,8 +80,8 @@ public class BaseService {
         LoginResponse response = userMapper.mapUserToLoginResponse(savedUser);
         response.setLoginSuccess(true);
         //Todo : Add this when authentication is done
-//        UserJWT userDetails = (UserJWT) userDetailsService.loadUserByUsername(savedUser.getEmailAddress());
-//        response.setAccessToken(jwtService.generateToken(userDetails));
+        UserJWT userDetails = (UserJWT) userDetailsService.loadUserByUsername(savedUser.getEmailId());
+        response.setAccessToken(jwtService.generateToken(userDetails));
         return response;
     }
 
