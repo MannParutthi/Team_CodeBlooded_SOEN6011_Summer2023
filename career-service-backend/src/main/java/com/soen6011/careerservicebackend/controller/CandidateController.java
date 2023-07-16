@@ -1,9 +1,74 @@
 package com.soen6011.careerservicebackend.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.soen6011.careerservicebackend.common.Authority;
+import com.soen6011.careerservicebackend.model.Application;
+import com.soen6011.careerservicebackend.model.Candidate;
+import com.soen6011.careerservicebackend.model.Employer;
+import com.soen6011.careerservicebackend.request.LoginRequest;
+import com.soen6011.careerservicebackend.response.LoginResponse;
+import com.soen6011.careerservicebackend.service.BaseService;
+import com.soen6011.careerservicebackend.service.CandidateService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/candidate")
 public class CandidateController {
+
+    private final CandidateService candidateService;
+
+    private final BaseService baseService;
+
+    public CandidateController(CandidateService candidateService, BaseService baseService) {
+        this.candidateService = candidateService;
+        this.baseService = baseService;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse response = baseService.login(request, Authority.ROLE_CANDIDATE);
+
+        if (response.getErrorMessage()!=null) {
+            return ResponseEntity.badRequest().body(response);
+        } else {
+            return ResponseEntity.ok(response);
+        }
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<LoginResponse> signUp(@Valid @RequestBody Candidate candidateToSignUp) {
+        LoginResponse response = baseService.signUp(candidateToSignUp, Authority.ROLE_CANDIDATE);
+
+        if (response.getErrorMessage()!=null) {
+            return ResponseEntity.badRequest().body(response);
+        } else {
+            return ResponseEntity.ok(response);
+        }
+    }
+
+    @PostMapping("/{candidateId}/jobs/{jobId}/apply")
+    public ResponseEntity<String> applyForJob(@PathVariable String candidateId, @PathVariable String jobId) {
+        boolean isApplied = candidateService.applyForJob(candidateId, jobId);
+        if (isApplied) {
+            return new ResponseEntity<>("Job application submitted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to submit job application", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{candidateId}/applications")
+    public ResponseEntity<List<Application>> getCandidateApplications(@PathVariable String candidateId) {
+        List<Application> applications = candidateService.getCandidateApplications(candidateId);
+        return new ResponseEntity<>(applications, HttpStatus.OK);
+    }
+
+    @GetMapping("/{candidateId}/resume/exists")
+    public ResponseEntity<Boolean> doesResumeExist(@PathVariable String candidateId) {
+        boolean resumeExists = candidateService.checkResumeExistence(candidateId);
+        return new ResponseEntity<>(resumeExists, HttpStatus.OK);
+    }
 }
