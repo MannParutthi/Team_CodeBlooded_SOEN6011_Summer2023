@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -71,15 +70,9 @@ export class AppliedJobsComponent implements OnInit {
     }
   ]
 
-  constructor(private _router: Router) { }
+  constructor() { }
 
-  loggedUser: any; // Variable to store the logged-in user details
-  
   ngOnInit(): void {
-    this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
-    if (!this.loggedUser) {
-      this._router.navigateByUrl('/home'); // If user is not logged in, redirect to the login page
-    }
   }
 
 }

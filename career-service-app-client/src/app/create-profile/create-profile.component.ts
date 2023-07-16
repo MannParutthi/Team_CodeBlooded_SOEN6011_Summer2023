@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateProfileService } from './create-profile.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-profile',
@@ -19,13 +18,9 @@ export class CreateProfileComponent implements OnInit {
 
   selectedFile: File | null = null;
 
-  constructor(private formBuilder: FormBuilder, private createProfileService: CreateProfileService, private _router: Router) { }
+  constructor(private formBuilder: FormBuilder, private createProfileService: CreateProfileService) { }
 
   ngOnInit(): void {
-    // Check if the user is already logged in, if so, navigate to the home page
-    if (localStorage.getItem('user') == null) {
-      this._router.navigateByUrl('/home');
-    }
   }
 
   createProfile() {

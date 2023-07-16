@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -66,19 +65,13 @@ export class BrowseJobsComponent implements OnInit {
     }
   ]
 
-  constructor(private toastr: ToastrService, private _router: Router) { }
+  constructor(private toastr: ToastrService) { }
 
-  loggedUser: any; // Variable to store the logged-in user details
-  
   ngOnInit(): void {
-    this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
-    if (!this.loggedUser) {
-      this._router.navigateByUrl('/home'); // If user is not logged in, redirect to the home page
-    }
   }
 
   applyToJob(jobId: number) {
-    console.log('applyToJob() called with jobId: ' + jobId);    
+    console.log('applyToJob() called with jobId: ' + jobId);
     // if not resume
     this.toastr.error('Please upload the resume first before applying to the job.');
   }

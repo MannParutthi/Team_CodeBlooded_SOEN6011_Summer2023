@@ -4,24 +4,5 @@
       Welcome to Career Service App!
     </h1>
   </div>
-  <ng-container *ngIf="loggedUser">
-    <div>
-      Welcome {{ loggedUser.emailId }}
-    </div>
-  </ng-container>
-  <ng-template #elseTemplate>
-    <div>
-      <button mat-raised-button color="primary" (click)="login(Authority.CANDIDATE)">
-        Candidate Login
-      </button>
-      <button mat-raised-button color="primary" (click)="login(Authority.EMPLOYER)">
-        Employer Login
-      </button>
-      <button mat-raised-button color="primary" (click)="login(Authority.ADMIN)">
-        Admin Login
-      </button>
-    </div>
-  </ng-template>
-  
 
 </main>
