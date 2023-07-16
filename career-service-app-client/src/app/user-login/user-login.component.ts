@@ -17,18 +17,20 @@ export class UserLoginComponent implements OnInit {
   });
 
   loggedUser: any; // Stores the logged-in user data
+  authority: any;
   constructor(private _router: Router, private formBuilder: FormBuilder, private userLoginService: UserLoginService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // If user is already logged in, redirect to home page
-    if (localStorage.getItem("user") != null) {
+    this.authority = localStorage.getItem("authority")
+    if (localStorage.getItem("user") != null || !this.authority) {
       this._router.navigateByUrl('/home')
     }
   }
 
   loginUser() {
     // Send a login request to the server with form data
-    this.userLoginService.loginUser(this.formGroup.getRawValue()).subscribe(
+    this.userLoginService.loginUser(this.formGroup.getRawValue(), this.authority).subscribe(
       (res) => {
         this.loggedUser = {"emailId": "jwalitshah2q@gmail.com", "name": "jwalit"}; // Store the logged-in user data
         localStorage.setItem("user", JSON.stringify(res)) // Store user data in local storage
