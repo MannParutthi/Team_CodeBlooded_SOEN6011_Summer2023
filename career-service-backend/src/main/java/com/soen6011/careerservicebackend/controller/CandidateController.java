@@ -87,4 +87,21 @@ public class CandidateController {
         Page<Job> jobs = jobService.getAllJobs(pageable);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
+
+    @GetMapping("/{candidateId}/resume/download")
+    public ResponseEntity<ByteArrayResource> download(@PathVariable String candidateId) throws IOException {
+        LoadFile loadFile = candidateService.downloadCandidateResume(candidateId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(loadFile.getFileType() ))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + loadFile.getFilename() + "\"")
+                .body(new ByteArrayResource(loadFile.getFile()));
+    }
+    
+    @PostMapping("/{candidateId}/resume/upload")
+    public ResponseEntity<String> uploadResume(@PathVariable String candidateId,
+                                               @RequestParam("file") MultipartFile file) throws IOException {
+        candidateService.uploadCandidateResume(candidateId, file);
+        return new ResponseEntity<>("Resume uploaded successfully", HttpStatus.OK);
+    }
 }
