@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,6 +65,7 @@ import { UserSignupComponent } from './user-signup/user-signup.component';
     MatCardModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    MatDialogModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
