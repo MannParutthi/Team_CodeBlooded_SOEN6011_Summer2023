@@ -26,6 +26,7 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
 import { BrowseCandidatesComponent } from './browse-candidates/browse-candidates.component';
 import { AddJobPostingComponent } from './add-job-posting/add-job-posting.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { EmployerJobsComponent } from './employer-job-posting/employer-job-posting.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 
@@ -38,6 +39,7 @@ import { UserSignupComponent } from './user-signup/user-signup.component';
     BrowseCandidatesComponent,
     AddJobPostingComponent,
     AppliedJobsComponent,
+    EmployerJobsComponent,
     UserLoginComponent,
     UserSignupComponent,
   ],
