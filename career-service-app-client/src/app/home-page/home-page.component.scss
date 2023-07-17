@@ -84,3 +84,13 @@
     flex: 1;
   }
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.job-posting {
+  background-color: #77766f; /* Set your desired card color here */
+  color: white; /* Set the text color */
+}

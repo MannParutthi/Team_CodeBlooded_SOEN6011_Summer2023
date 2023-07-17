@@ -13,43 +13,55 @@
     </ng-template>
   </ng-container>
   <ng-template #elseTemplate class="d-md-flex my-md-3 ps-md-3">
-    <mat-card class="job-posting">
-      <mat-card-content>
-        Candidate
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="login(Authority.CANDIDATE)">
-          Candidate Login
-        </button>
-        <button mat-raised-button color="primary" (click)="signup(Authority.CANDIDATE)">
-          Candidate Signup
-        </button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="job-posting">
-      <mat-card-content>
-        Employer
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="login(Authority.EMPLOYER)">
-          Employer Login
-        </button>
-        <button mat-raised-button color="primary" (click)="signup(Authority.EMPLOYER)">
-          Employer Signup
-        </button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="job-posting">
-      <mat-card-content>
-        Admin
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="login(Authority.ADMIN)">
-          Admin Login
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    
+    <div class="row">
+      <div class="col">
+        <mat-card class="job-posting">
+          <mat-card-title>Candidate</mat-card-title>
+          <img class="" src="/assets/candidate.png" style="max-width: 300px; max-height: 300px;">
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions class="button-container">
+            <button mat-raised-button color="primary" (click)="login(Authority.CANDIDATE)">
+              Candidate Login
+            </button>
+            <button mat-raised-button color="primary" (click)="signup(Authority.CANDIDATE)">
+              Candidate Signup
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    
+      <div class="col">
+        <mat-card class="job-posting">
+          <mat-card-title>Employer</mat-card-title>
+          <img mat-card-image src="/assets/employer.png" style="max-width: 300px; max-height: 300px;">
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions class="button-container">
+            <button mat-raised-button color="primary" (click)="login(Authority.EMPLOYER)">
+              Employer Login
+            </button>
+            <button mat-raised-button color="primary" (click)="signup(Authority.EMPLOYER)">
+              Employer Signup
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    
+      <div class="col">
+        <mat-card class="job-posting">
+          <mat-card-title>Admin</mat-card-title>
+          <img mat-card-image src="/assets/admin.png" style="max-width: 300px; max-height: 300px;">
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions class="button-container">
+            <button mat-raised-button color="primary" (click)="login(Authority.ADMIN)">
+              Admin Login
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
   </ng-template>
 </main>
