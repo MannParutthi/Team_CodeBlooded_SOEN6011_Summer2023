@@ -37,9 +37,10 @@ public class SecurityConfig {
 		http.cors().and().csrf().disable().exceptionHandling().and().exceptionHandling()
 				.authenticationEntryPoint(webTokensAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/api/v1/candidate/login").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/v1/candidate/signup").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/v1/employer/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/candidate/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/candidate/signup").permitAll()
+				.antMatchers(HttpMethod.POST, "/employer/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/employer/signup").permitAll()
 				.anyRequest().authenticated();
 
 		JWTAuthenticationFilter authenticationTokenFilter = new JWTAuthenticationFilter(jwtUserDetailsService,
