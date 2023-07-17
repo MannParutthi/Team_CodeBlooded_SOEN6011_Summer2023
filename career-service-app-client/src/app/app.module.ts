@@ -27,6 +27,8 @@ import { BrowseCandidatesComponent } from './browse-candidates/browse-candidates
 import { AddJobPostingComponent } from './add-job-posting/add-job-posting.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 import { EmployerJobsComponent } from './employer-job-posting/employer-job-posting.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserSignupComponent } from './user-signup/user-signup.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { EmployerJobsComponent } from './employer-job-posting/employer-job-posti
     BrowseCandidatesComponent,
     AddJobPostingComponent,
     AppliedJobsComponent,
-    EmployerJobsComponent
+    EmployerJobsComponent,
+    UserLoginComponent,
+    UserSignupComponent,
   ],
   imports: [
     BrowserModule,

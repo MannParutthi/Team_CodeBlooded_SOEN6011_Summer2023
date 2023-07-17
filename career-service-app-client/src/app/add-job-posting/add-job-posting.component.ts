@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddJobService } from './add-job-posting.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-job-posting',
@@ -24,9 +25,15 @@ export class AddJobPostingComponent implements OnInit {
     // salaryRange: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private addJobService: AddJobService) { }
+  constructor(private formBuilder: FormBuilder, private addJobService: AddJobService, private _router: Router) { }
 
-  ngOnInit() {
+  loggedUser: any; // Variable to store the logged-in user details
+  
+  ngOnInit(): void {
+    this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
+    if (!this.loggedUser) {
+      this._router.navigateByUrl('/home'); // If user is not logged in, redirect to the login page
+    }
   }
 
   onSubmit() {

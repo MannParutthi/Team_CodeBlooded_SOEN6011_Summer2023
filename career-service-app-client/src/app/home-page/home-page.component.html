@@ -1,8 +1,55 @@
-<main class="container-fluid" style="height: calc(100vh - 56px);">
+<main class="container-fluid">
   <div fxLayout="column" style="height: 100%;">
     <h1 class="centeredContent">
       Welcome to Career Service App!
     </h1>
   </div>
+  <ng-container *ngIf="loggedUser; else elseTemplate">
+    <ng-container *ngIf="loggedUser.authority === 'ROLE_EMPLOYER'; else elseTemplate">
+      Welcome {{ loggedUser.companyName }}
+    </ng-container>
+    <ng-template #elseTemplate>
+      Welcome {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+    </ng-template>
+  </ng-container>
+  <ng-template #elseTemplate class="d-md-flex my-md-3 ps-md-3">
+    <mat-card class="job-posting">
+      <mat-card-content>
+        Candidate
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="login(Authority.CANDIDATE)">
+          Candidate Login
+        </button>
+        <button mat-raised-button color="primary" (click)="signup(Authority.CANDIDATE)">
+          Candidate Signup
+        </button>
+      </mat-card-actions>
+    </mat-card>
 
+    <mat-card class="job-posting">
+      <mat-card-content>
+        Employer
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="login(Authority.EMPLOYER)">
+          Employer Login
+        </button>
+        <button mat-raised-button color="primary" (click)="signup(Authority.EMPLOYER)">
+          Employer Signup
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="job-posting">
+      <mat-card-content>
+        Admin
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="login(Authority.ADMIN)">
+          Admin Login
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
 </main>
