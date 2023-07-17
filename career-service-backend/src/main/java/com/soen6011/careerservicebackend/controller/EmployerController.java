@@ -4,11 +4,14 @@ import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.model.Candidate;
 import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
+import com.soen6011.careerservicebackend.request.EmployerUpdateRequest;
 import com.soen6011.careerservicebackend.request.LoginRequest;
+import com.soen6011.careerservicebackend.response.EmployerProfileResponse;
 import com.soen6011.careerservicebackend.response.JobApplicationsResponse;
 import com.soen6011.careerservicebackend.response.LoginResponse;
 import com.soen6011.careerservicebackend.service.ApplicationService;
 import com.soen6011.careerservicebackend.service.BaseService;
+import com.soen6011.careerservicebackend.service.EmployerService;
 import com.soen6011.careerservicebackend.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,11 +40,14 @@ public class EmployerController {
 
     private final BaseService baseService;
 
+    private final EmployerService employerService;
+
     @Autowired
-    public EmployerController(JobService jobService, ApplicationService applicationService, BaseService baseService) {
+    public EmployerController(JobService jobService, ApplicationService applicationService, BaseService baseService, EmployerService employerService) {
         this.jobService = jobService;
         this.applicationService = applicationService;
         this.baseService = baseService;
+        this.employerService = employerService;
     }
 
     @PostMapping("/login")
@@ -106,5 +112,15 @@ public class EmployerController {
         response.setCandidates(candidates);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{employerId}/profile")
+    public EmployerProfileResponse getProfileCard(@PathVariable String employerId) {
+        return employerService.getProfileCard(employerId);
+    }
+
+    @PatchMapping(value = "/{employerId}/profile")
+    public EmployerProfileResponse updateProfile(@PathVariable String employerId, @RequestBody EmployerUpdateRequest userUpdateRequest) {
+        return employerService.updateProfile(employerId, userUpdateRequest);
     }
 }
