@@ -23,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employer")
+@CrossOrigin("http://localhost:4200")
 public class EmployerController {
 
     //TODO: For CICD test - will be deleted
