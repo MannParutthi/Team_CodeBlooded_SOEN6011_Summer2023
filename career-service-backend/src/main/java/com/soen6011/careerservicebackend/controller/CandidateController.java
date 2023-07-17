@@ -29,6 +29,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/candidate")
+@CrossOrigin("http://localhost:4200")
 public class CandidateController {
 
     private final CandidateService candidateService;
