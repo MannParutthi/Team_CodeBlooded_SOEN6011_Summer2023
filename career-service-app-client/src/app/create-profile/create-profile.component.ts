@@ -75,7 +75,6 @@ export class CreateProfileComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile, this.selectedFile.name);
-      console.log(formData, this.selectedFile);
       this.createProfileService.uploadResume(this.loggedUser.userId, formData).subscribe(
         (response: any) => {
           this.toastr.success('Resume successfully uploaded', 'Success'); // Show success message using Toastr

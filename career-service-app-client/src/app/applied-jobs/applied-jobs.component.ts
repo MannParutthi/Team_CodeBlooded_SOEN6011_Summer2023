@@ -5,6 +5,7 @@ import { Application } from './../../models/Application';
 import { Employer } from 'src/models/Employer';
 import { Job } from 'src/models/Job';
 import { Candidate } from 'src/models/Candidate';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -77,10 +78,14 @@ export class AppliedJobsComponent implements OnInit {
     }
   ]
 
-  constructor(private _router: Router, private appliedJobsService: AppliedJobsService) { }
+  constructor(private _router: Router, private appliedJobsService: AppliedJobsService, private toastr: ToastrService) { }
 
   loggedUser: any; // Variable to store the logged-in user details
-  
+  application: Application = new Application;
+  job: Job = new Job;
+  employer: Employer = new Employer;
+  candidate: Candidate = new Candidate;
+
   ngOnInit(): void {
     this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
     this.loggedUser = JSON.parse(this.loggedUser)
@@ -89,23 +94,44 @@ export class AppliedJobsComponent implements OnInit {
     }
     this.appliedJobsService.getAllAppliedJobs(this.loggedUser.userId).subscribe(
       (res: any) => {
-        for (let index = 0, length = res.content.length; index < length; index += 1) {
-          const element = res.content[index];
-          const application = new Application
-          const employer = new Employer
-          const job = new Job
-          const candidate = new Candidate
-          // get candidate
-          // get job
-          // get employer
-          application.id = element.id
-          application.candidate = candidate
-          application.employer = employer
-          application.job = job
+        console.log(res)
+        for (let index = 0, length = res.length; index < length; index += 1) {
+          const element = res[index];
+          this.job = new Job
+          this.employer = new Employer
+          this.candidate = new Candidate
+          this.application = new Application
+          this.appliedJobsService.getEmployer(element.employerId).subscribe(
+            (response: any) => {
+              this.employer = response
+              this.appliedJobsService.getJob(element.jobId).subscribe(
+                (response: any) => {
+                  console.log(response)
+                  this.job = response
+                  this.application.id = element.id
+                  this.application.employer = this.employer
+                  this.application.job = this.job
+                  this.application.status = element.status
+                  this.appliedJobsList.push(this.application)
+                },
+                (error: any) => { 
+                  console.log(error)
+                  this.toastr.error('Error occured');
+                  this._router.navigateByUrl('/home')
+                }
+              );
+            },
+            (error: any) => { 
+              console.log(error)
+              this.toastr.error('Error occured');
+              this._router.navigateByUrl('/home')
+            }
+          );
         }
       },
-      (error: any) => { 
-        console.error('Fetching application failed', error);
+      (error: any) => {
+        this.toastr.error('Error occured')
+        this._router.navigateByUrl('/home')
       }
     );
   }
