@@ -12,11 +12,11 @@ export class CreateProfileService {
   constructor(private http: HttpClient) { }
 
   uploadResume(candidateId: any, fileData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/candidate/${candidateId}/resume/upload`, fileData) as Observable<any>;
+    return this.http.post(`${this.baseUrl}/candidate/${candidateId}/resume/upload`, fileData, {responseType: 'text'}) as Observable<any>;
   }
 
   downloadResume(candidateId: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/candidate/${candidateId}/resume/download`) as Observable<any>;
+    return this.http.get(`${this.baseUrl}/candidate/${candidateId}/resume/download`, {responseType: 'blob'}) as Observable<any>;
   }
 
 }

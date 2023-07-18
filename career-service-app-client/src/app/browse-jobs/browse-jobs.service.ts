@@ -20,7 +20,7 @@ export class BrowseJobsService {
   }
 
   applyToJob(candidateId: any, jobId: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/candidate/${candidateId}/jobs/${jobId}/apply`,{}) as Observable<any>;
+    return this.http.post(`${this.baseUrl}/candidate/${candidateId}/jobs/${jobId}/apply`, {}, {responseType: 'text'}) as Observable<any>;
   }
 
 }

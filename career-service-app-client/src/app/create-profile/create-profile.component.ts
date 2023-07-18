@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateProfileService } from './create-profile.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BrowseJobsService } from '../browse-jobs/browse-jobs.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -22,7 +23,8 @@ export class CreateProfileComponent implements OnInit {
 
   loggedUser: any;
   resumeId: any;
-  constructor(private formBuilder: FormBuilder, private createProfileService: CreateProfileService, private _router: Router, private toastr: ToastrService) { }
+  resumeExists: any;
+  constructor(private formBuilder: FormBuilder, private createProfileService: CreateProfileService, private browseJobsService: BrowseJobsService, private _router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // Check if the user is already logged in, if so, navigate to the home page
@@ -31,12 +33,29 @@ export class CreateProfileComponent implements OnInit {
     if (this.loggedUser == null) {
       this._router.navigateByUrl('/home');
     }
-    this.createProfileService.downloadResume(this.loggedUser.userId).subscribe(
+    this.browseJobsService.isResumeExists(this.loggedUser.userId).subscribe(
       (res: any) => {
-        console.log(res)
+        this.resumeExists = res
+        if (this.resumeExists) {
+          this.createProfileService.downloadResume(this.loggedUser.userId).subscribe(
+            (res: any) => {
+              console.log(res)
+              let url = window.URL.createObjectURL(res);
+              let a = document.getElementById('downloadButton');
+              if (a instanceof HTMLAnchorElement) {
+                a.href = url;
+                a.download = res.filename;
+              }
+            },
+            (error: any) => { 
+              console.error('File download failed', error);
+            }
+          );
+        }
       },
       (error: any) => { 
-        console.error('File download failed', error);
+        console.error('API call failed', error);
+        return
       }
     );
   }

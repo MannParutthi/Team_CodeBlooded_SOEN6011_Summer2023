@@ -117,8 +117,8 @@ export class BrowseJobsComponent implements OnInit {
             console.log(res)
             this.toastr.success('Job applied successfully', 'Success'); // Show success message using Toastr
           },
-          (error: any) => { 
-            console.error('Job application failed', error);
+          (error: any) => {
+            this.toastr.error('Job application failed and Already applied for the job');
           }
         );
       },

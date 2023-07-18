@@ -38,10 +38,15 @@
     </button>
   </form>
 
-  <div appearance="outline" class="field" style="margin-top: 20px;">
-    <h2>Upload Resume</h2>
-    <input type="file" (change)="onFileSelected($event)">
-    <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile" style="margin-top: 20px;">Upload</button>
+  <div class="button-group">
+    <div *ngIf="resumeExists" appearance="outline" class="field" style="margin-top: 20px;">
+      <h2>Download Resume</h2>
+      <a id="downloadButton" mat-raised-button color="primary" (click)="onUpload()">Download</a>
+    </div>
+    <div appearance="outline" class="field" style="margin-top: 20px;">
+      <h2>Upload Resume</h2>
+      <input type="file" (change)="onFileSelected($event)">
+      <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile" style="margin-top: 20px;">Upload</button>
+    </div>
   </div>
-
 </div>
