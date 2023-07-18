@@ -18,19 +18,29 @@ public class JobService {
         this.jobRepository = jobRepository;
     }
 
-    public void addJob(Job job) {
-        jobRepository.save(job);
+    public void addJob(Job job) throws Exception {
+        try {
+            jobRepository.save(job);
+        } catch (Exception e) {
+            throw new Exception("Failed to add job");
+        }
     }
 
     public Page<Job> getJobsByEmployer(String employerId, Pageable pageable) {
         return jobRepository.findByEmployerId(employerId, pageable);
     }
 
-    public void deleteJob(String jobId) {
+    public void deleteJob(String jobId) throws Exception {
         jobRepository.deleteById(jobId);
+
+        try {
+            jobRepository.deleteById(jobId);
+        } catch (Exception e) {
+            throw new Exception("Failed to delete job");
+        }
     }
 
-    public void updateJob(String jobId, Job updatedJob) {
+    public void updateJob(String jobId, Job updatedJob) throws Exception {
 
         Job existingJob = jobRepository.findById(jobId).orElseThrow(() -> new ResourceNotFoundException("Job not found"));
 
@@ -39,10 +49,19 @@ public class JobService {
         existingJob.setLocation(updatedJob.getLocation());
         existingJob.setRequirements(updatedJob.getRequirements());
 
-        jobRepository.save(existingJob);
+        try {
+            jobRepository.save(existingJob);
+        } catch (Exception e) {
+            throw new Exception("Failed to update job");
+        }
     }
     
     public Page<Job> getAllJobs(Pageable pageable) {
     	return  jobRepository.findAll(pageable);
+    }
+
+    public Job getJob(String jobId) {
+        return jobRepository.findById(jobId)
+                .orElse(null);
     }
 }
