@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppliedJobsService } from './applied-jobs.service';
+import { Application } from './../../models/Application';
+import { Employer } from 'src/models/Employer';
+import { Job } from 'src/models/Job';
+import { Candidate } from 'src/models/Candidate';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -8,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AppliedJobsComponent implements OnInit {
 
+  appliedJobsList: Array<Application> = [];
   jobsList = [
     {
       jobId: 1,
@@ -71,15 +77,36 @@ export class AppliedJobsComponent implements OnInit {
     }
   ]
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private appliedJobsService: AppliedJobsService) { }
 
   loggedUser: any; // Variable to store the logged-in user details
   
   ngOnInit(): void {
     this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
+    this.loggedUser = JSON.parse(this.loggedUser)
     if (!this.loggedUser) {
       this._router.navigateByUrl('/home'); // If user is not logged in, redirect to the login page
     }
+    this.appliedJobsService.getAllAppliedJobs(this.loggedUser.userId).subscribe(
+      (res: any) => {
+        for (let index = 0, length = res.content.length; index < length; index += 1) {
+          const element = res.content[index];
+          const application = new Application
+          const employer = new Employer
+          const job = new Job
+          const candidate = new Candidate
+          // get candidate
+          // get job
+          // get employer
+          application.id = element.id
+          application.candidate = candidate
+          application.employer = employer
+          application.job = job
+        }
+      },
+      (error: any) => { 
+        console.error('Fetching application failed', error);
+      }
+    );
   }
-
 }

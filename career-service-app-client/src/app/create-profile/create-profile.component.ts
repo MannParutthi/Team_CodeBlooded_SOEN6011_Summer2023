@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateProfileService } from './create-profile.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { BrowseJobsService } from '../browse-jobs/browse-jobs.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -19,13 +21,43 @@ export class CreateProfileComponent implements OnInit {
 
   selectedFile: File | null = null;
 
-  constructor(private formBuilder: FormBuilder, private createProfileService: CreateProfileService, private _router: Router) { }
+  loggedUser: any;
+  resumeId: any;
+  resumeExists: any;
+  constructor(private formBuilder: FormBuilder, private createProfileService: CreateProfileService, private browseJobsService: BrowseJobsService, private _router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // Check if the user is already logged in, if so, navigate to the home page
-    if (localStorage.getItem('user') == null) {
+    this.loggedUser = localStorage.getItem('user')
+    this.loggedUser = JSON.parse(this.loggedUser)
+    if (this.loggedUser == null) {
       this._router.navigateByUrl('/home');
     }
+    this.browseJobsService.isResumeExists(this.loggedUser.userId).subscribe(
+      (res: any) => {
+        this.resumeExists = res
+        if (this.resumeExists) {
+          this.createProfileService.downloadResume(this.loggedUser.userId).subscribe(
+            (res: any) => {
+              console.log(res)
+              let url = window.URL.createObjectURL(res);
+              let a = document.getElementById('downloadButton');
+              if (a instanceof HTMLAnchorElement) {
+                a.href = url;
+                a.download = res.filename;
+              }
+            },
+            (error: any) => { 
+              console.error('File download failed', error);
+            }
+          );
+        }
+      },
+      (error: any) => { 
+        console.error('API call failed', error);
+        return
+      }
+    );
   }
 
   createProfile() {
@@ -44,14 +76,13 @@ export class CreateProfileComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.selectedFile, this.selectedFile.name);
       console.log(formData, this.selectedFile);
-      this.createProfileService.uploadResume('candiateid', formData).subscribe(
+      this.createProfileService.uploadResume(this.loggedUser.userId, formData).subscribe(
         (response: any) => {
-          console.log('File uploaded successfully');
-          // Perform further actions upon successful upload
+          this.toastr.success('Resume successfully uploaded', 'Success'); // Show success message using Toastr
+          this._router.navigateByUrl('/create-profile')
         },
-        (error: any) => {
+        (error: any) => { 
           console.error('File upload failed', error);
-          // Handle error cases
         }
       );
     }

@@ -10,3 +10,20 @@
 table {
   width: 100%;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+}
+
+.button-spacing {
+  width: 10px;
+  /* Adjust the width for desired spacing */
+}
