@@ -29,9 +29,9 @@
     <a *ngIf="loggedUser!=null && loggedUser.authority === Authority.CANDIDATE" class="py-2 d-none d-md-inline-block" routerLink="/applied-jobs" [ngClass]="{'activeTab': _router.url.includes('applied-jobs')}">
       Applied Jobs
     </a>
-    <button *ngIf="loggedUser!=null" class="py-2 d-none d-md-inline-block btn-dark" (click)="logout()">
+    <a *ngIf="loggedUser!=null" class="py-2 d-none d-md-inline-block btn-dark" (click)="logout()">
       Logout
-    </button>
+    </a>
   </nav>
 </header>
 <div class="content">

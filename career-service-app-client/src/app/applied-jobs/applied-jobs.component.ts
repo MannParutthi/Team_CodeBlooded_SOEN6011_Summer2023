@@ -94,7 +94,6 @@ export class AppliedJobsComponent implements OnInit {
     }
     this.appliedJobsService.getAllAppliedJobs(this.loggedUser.userId).subscribe(
       (res: any) => {
-        console.log(res)
         for (let index = 0, length = res.length; index < length; index += 1) {
           const element = res[index];
           this.job = new Job
@@ -106,7 +105,6 @@ export class AppliedJobsComponent implements OnInit {
               this.employer = response
               this.appliedJobsService.getJob(element.jobId).subscribe(
                 (response: any) => {
-                  console.log(response)
                   this.job = response
                   this.application.id = element.id
                   this.application.employer = this.employer
@@ -115,7 +113,6 @@ export class AppliedJobsComponent implements OnInit {
                   this.appliedJobsList.push(this.application)
                 },
                 (error: any) => { 
-                  console.log(error)
                   this.toastr.error('Error occured');
                   this._router.navigateByUrl('/home')
                 }

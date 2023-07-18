@@ -19,4 +19,12 @@ export class CreateProfileService {
     return this.http.get(`${this.baseUrl}/candidate/${candidateId}/resume/download`, {responseType: 'blob'}) as Observable<any>;
   }
 
+  updateEmployerProfile(employerId: any, formData: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/employer/${employerId}/profile`, formData) as Observable<any>;
+  }
+
+  updateCandidateProfile(candidateId: any, formData: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/candidate/${candidateId}/profile`, formData) as Observable<any>;
+  }
+
 }
