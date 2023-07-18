@@ -2,12 +2,16 @@ package com.soen6011.careerservicebackend.service;
 
 import com.soen6011.careerservicebackend.common.ApplicationStatus;
 import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
+import com.soen6011.careerservicebackend.mapper.CandidateMapper;
 import com.soen6011.careerservicebackend.model.Application;
 import com.soen6011.careerservicebackend.model.Candidate;
+import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
 import com.soen6011.careerservicebackend.repository.ApplicationRepository;
 import com.soen6011.careerservicebackend.repository.CandidateRepository;
 import com.soen6011.careerservicebackend.repository.JobRepository;
+import com.soen6011.careerservicebackend.request.CandidateUpdateRequest;
+import com.soen6011.careerservicebackend.response.CandidateProfileResponse;
 import com.soen6011.careerservicebackend.response.LoadFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,11 +31,14 @@ public class CandidateService {
 
     private final FileService fileService;
 
-    public CandidateService(CandidateRepository candidateRepository, JobRepository jobRepository, ApplicationRepository applicationRepository, FileService fileService) {
+    private final CandidateMapper candidateMapper;
+
+    public CandidateService(CandidateRepository candidateRepository, JobRepository jobRepository, ApplicationRepository applicationRepository, FileService fileService, CandidateMapper candidateMapper) {
         this.candidateRepository = candidateRepository;
         this.jobRepository = jobRepository;
         this.applicationRepository = applicationRepository;
         this.fileService = fileService;
+        this.candidateMapper = candidateMapper;
     }
 
     public List<Candidate> getCandidatesByIds(List<String> candidateIds) {
@@ -113,5 +120,25 @@ public class CandidateService {
     public Candidate getCandidate(String candidateId) {
         return candidateRepository.findById(candidateId)
                 .orElse(null);
+    }
+
+    public CandidateProfileResponse getProfileCard(String candidateId) {
+
+        Candidate candidate = candidateRepository.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+
+        return candidateMapper.toCandidateProfileResponse(candidate);
+
+    }
+
+    public CandidateProfileResponse updateProfile(String candidateId, CandidateUpdateRequest candidateUpdateRequest) {
+
+        Candidate candidate = candidateRepository.findById(candidateId).orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+
+        Candidate updatedCandidate = candidateMapper.fromCandidateUpdateRequest(candidate,candidateUpdateRequest);
+
+        candidateRepository.save(updatedCandidate);
+
+        return candidateMapper.toCandidateProfileResponse(updatedCandidate);
+
     }
 }
