@@ -5,8 +5,10 @@ import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.model.Application;
 import com.soen6011.careerservicebackend.model.Candidate;
 import com.soen6011.careerservicebackend.model.Job;
+import com.soen6011.careerservicebackend.request.CandidateUpdateRequest;
 import com.soen6011.careerservicebackend.request.LoginRequest;
 import com.soen6011.careerservicebackend.response.ApplicationResponse;
+import com.soen6011.careerservicebackend.response.CandidateProfileResponse;
 import com.soen6011.careerservicebackend.response.LoadFile;
 import com.soen6011.careerservicebackend.response.LoginResponse;
 import com.soen6011.careerservicebackend.service.ApplicationService;
@@ -151,6 +153,16 @@ public class CandidateController {
         } catch (IOException e) {
             return new ResponseEntity<>("Failed to upload candidate's resume", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping(value = "/{candidateId}/profile")
+    public CandidateProfileResponse getProfileCard(@PathVariable String candidateId) {
+        return candidateService.getProfileCard(candidateId);
+    }
+
+    @PatchMapping(value = "/{candidateId}/profile")
+    public CandidateProfileResponse updateProfile(@PathVariable String candidateId, @RequestBody CandidateUpdateRequest candidateUpdateRequest) {
+        return candidateService.updateProfile(candidateId, candidateUpdateRequest);
     }
 
 }
