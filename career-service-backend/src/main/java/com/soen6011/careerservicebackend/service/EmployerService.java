@@ -37,4 +37,9 @@ public class EmployerService {
         return employerMapper.toEmployerProfileResponse(updatedEmployer);
 
     }
+
+    public Employer getEmployer(String employerId) {
+        return employerRepository.findById(employerId)
+                .orElse(null);
+    }
 }
