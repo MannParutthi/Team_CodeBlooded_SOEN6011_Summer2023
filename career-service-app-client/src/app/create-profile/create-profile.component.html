@@ -42,16 +42,31 @@
         </mat-error>
       </mat-form-field>
 
+      <div class="button-group">
+        <div *ngIf="resumeExists" appearance="outline" class="field" style="margin-top: 20px;">
+          <h2>Download Resume</h2>
+          <a id="downloadButton" mat-raised-button color="primary" (click)="onUpload()">Download</a>
+        </div>
+        <div appearance="outline" class="field" style="margin-top: 20px;">
+          <h2>Upload Resume</h2>
+          <input type="file" (change)="onFileSelected($event)">
+          <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile"
+            style="margin-top: 20px;">Upload</button>
+        </div>
+      </div>
+
       <button mat-raised-button color="primary" (click)="updateProfile()" [disabled]="candidateProfileForm.invalid">
         Update Profile
       </button>
     </form>
+
+
   </ng-container>
   <ng-container *ngIf="loggedUser.authority === Authority.EMPLOYER">
     <form [formGroup]="employerProfileForm">
       <mat-form-field appearance="outline" class="field">
         <mat-label>Email</mat-label>
-        <input matInput value="loggedUser.emailId" placeholder="Enter email" readonly>
+        <input matInput value="{{loggedUser.emailId}}" placeholder="Enter email" readonly>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="field">
@@ -73,26 +88,10 @@
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="updateProfile()" [disabled]="candidateProfileForm.invalid">
+      <button mat-raised-button color="primary" (click)="updateProfile()" [disabled]="employerProfileForm.invalid">
         UpdateProfile
       </button>
     </form>
   </ng-container>
 
-  <div class="button-group">
-    <div *ngIf="resumeExists" appearance="outline" class="field" style="margin-top: 20px;">
-      <h2>Download Resume</h2>
-      <a id="downloadButton" mat-raised-button color="primary" (click)="onUpload()">Download</a>
-    </div>
-    <div  appearance="outline" class="field" style="margin-top: 20px;">
-      <h2>Generate Resume</h2>
-      <a id="generateButton" mat-raised-button color="primary" (click)="onGenerate()">Generate</a>
-    </div>
-    <div appearance="outline" class="field" style="margin-top: 20px;">
-      <h2>Upload Resume</h2>
-      <input type="file" (change)="onFileSelected($event)">
-      <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile"
-        style="margin-top: 20px;">Upload</button>
-    </div>
-  </div>
 </div>
