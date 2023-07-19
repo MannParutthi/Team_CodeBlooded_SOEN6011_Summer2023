@@ -30,7 +30,7 @@
             <mat-form-field appearance="outline" class="field">
                 <mat-label>Experience</mat-label>
                 <input type="number" matInput formControlName="experience" placeholder="Enter experience" [min]="0">
-                <mat-error *ngIf="candidateProfileForm.controls['experience'].invalid && candidateProfileForm.controls['experienced'].touched">
+                <mat-error *ngIf="candidateProfileForm.controls['experience'].invalid && candidateProfileForm.controls['experience'].touched">
                     Experience is required
                 </mat-error>
             </mat-form-field>
