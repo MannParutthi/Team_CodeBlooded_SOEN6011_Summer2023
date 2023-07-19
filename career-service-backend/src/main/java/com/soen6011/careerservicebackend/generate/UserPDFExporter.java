@@ -19,7 +19,7 @@ public class UserPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(new Color(10, 102, 194));
         cell.setPadding(5);
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
@@ -53,7 +53,7 @@ public class UserPDFExporter {
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
-        font.setColor(Color.BLUE);
+        font.setColor(new Color(10, 102, 194));
 
         Paragraph p = new Paragraph("Resume", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
