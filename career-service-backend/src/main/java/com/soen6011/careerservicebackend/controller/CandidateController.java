@@ -2,6 +2,7 @@ package com.soen6011.careerservicebackend.controller;
 
 import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
+import com.soen6011.careerservicebackend.generate.UserPDFExporter;
 import com.soen6011.careerservicebackend.model.Application;
 import com.soen6011.careerservicebackend.model.Candidate;
 import com.soen6011.careerservicebackend.model.Job;
@@ -26,8 +27,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -140,6 +145,21 @@ public class CandidateController {
                 .contentType(MediaType.parseMediaType(loadFile.getFileType() ))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + loadFile.getFilename() + "\"")
                 .body(new ByteArrayResource(loadFile.getFile()));
+    }
+
+    @GetMapping("/{candidateId}/resume/generate")
+    public void generate(@PathVariable String candidateId, HttpServletResponse response) throws IOException {
+        Candidate user = candidateService.getCandidateById(candidateId);
+
+        response.setContentType("application/pdf");
+
+        String headerKey = "Content-Disposition";
+        String fileName = user.getFirstName() + "_" + user.getLastName()  + "_Resume.pdf";
+        String headerValue = "attachment; filename=" + fileName;
+        response.setHeader(headerKey, headerValue);
+
+        UserPDFExporter exporter = new UserPDFExporter(user);
+        exporter.export(response);
     }
 
     @PostMapping("/{candidateId}/resume/upload")
