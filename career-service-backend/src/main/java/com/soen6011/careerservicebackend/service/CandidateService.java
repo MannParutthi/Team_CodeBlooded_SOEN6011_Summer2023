@@ -5,7 +5,6 @@ import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.mapper.CandidateMapper;
 import com.soen6011.careerservicebackend.model.Application;
 import com.soen6011.careerservicebackend.model.Candidate;
-import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
 import com.soen6011.careerservicebackend.repository.ApplicationRepository;
 import com.soen6011.careerservicebackend.repository.CandidateRepository;
@@ -43,6 +42,11 @@ public class CandidateService {
 
     public List<Candidate> getCandidatesByIds(List<String> candidateIds) {
         return (List<Candidate>) candidateRepository.findAllById(candidateIds);
+    }
+
+    public Candidate getCandidateById(String candidateId) {
+        return candidateRepository.findById(candidateId)
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
     }
 
     public boolean applyForJob(String candidateId, String jobId) {

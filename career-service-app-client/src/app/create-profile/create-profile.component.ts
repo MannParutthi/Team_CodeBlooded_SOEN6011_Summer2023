@@ -88,4 +88,16 @@ export class CreateProfileComponent implements OnInit {
     }
   }
 
+  onGenerate() {
+    this.createProfileService.generateResume(this.loggedUser.userId).subscribe(
+      (response: any) => {
+        this.toastr.success('Resume successfully Generated', 'Success'); // Show success message using Toastr
+        this._router.navigateByUrl('/create-profile')
+      },
+      (error: any) => { 
+        console.error('File upload failed', error);
+      }
+    );
+  }
+
 }
