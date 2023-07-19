@@ -56,6 +56,7 @@ export class CreateProfileComponent implements OnInit {
       })
     }
 
+    if(this.loggedUser.authority !== Authority.EMPLOYER){
     this.browseJobsService.isResumeExists(this.loggedUser.userId).subscribe(
       (res: any) => {
         this.resumeExists = res
@@ -79,7 +80,7 @@ export class CreateProfileComponent implements OnInit {
         this.toastr.error('Error occured', 'Failed');
       }
     );
-  }
+  }}
 
   updateProfile() {
     if (this.loggedUser.authority === Authority.CANDIDATE && this.candidateProfileForm.valid) {
@@ -135,5 +136,4 @@ export class CreateProfileComponent implements OnInit {
       );
     }
   }
-
 }

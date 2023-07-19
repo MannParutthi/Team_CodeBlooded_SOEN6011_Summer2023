@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddJobService } from './add-job-posting.service';
+import { UpdateJobService } from './update-job-posting.service';
 import { Router } from '@angular/router';
-import { EmployerService } from '../employer-job-posting/employer-job-posting.service';
 import { EmployerJobDetailService } from '../employer-job-details/employer-job-details.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-add-job-posting',
-  templateUrl: './add-job-posting.component.html',
-  styleUrls: ['./add-job-posting.component.scss']
+  selector: 'app-update-job-posting',
+  templateUrl: './update-job-posting.component.html',
+  styleUrls: ['./update-job-posting.component.scss']
 })
-export class AddJobPostingComponent implements OnInit {
+export class UpdateJobPostingComponent implements OnInit {
 
   employerId = "";
   currentJobId : any; 
@@ -26,7 +25,7 @@ export class AddJobPostingComponent implements OnInit {
     requirements: ['', Validators.required],
   });
 
-  constructor(private formBuilder: FormBuilder, private addJobService: AddJobService, private _router: Router,private employerJobDetailSevice: EmployerJobDetailService, private toastr : ToastrService ) { }
+  constructor(private formBuilder: FormBuilder, private updateJobService: UpdateJobService, private _router: Router,private employerJobDetailSevice: EmployerJobDetailService,  private toastr: ToastrService  ) { }
 
   loggedUser: any; // Variable to store the logged-in user details
   
@@ -36,6 +35,23 @@ export class AddJobPostingComponent implements OnInit {
     if (!this.loggedUser) {
       this._router.navigateByUrl('/home'); // If user is not logged in, redirect to the login page
     }
+
+    this.employerJobDetailSevice.getJobPostingsDetails(this.currentJobId).subscribe(
+      (data) => {
+        this.employerJobInfo = data;
+        console.warn(this.employerJobInfo)
+        this.jobPostingForm.setValue(
+          {
+            position : this.employerJobInfo.position, 
+            location : this.employerJobInfo.location, 
+            description : this.employerJobInfo.description, 
+            requirements : this.employerJobInfo.requirements 
+          })
+      },
+      (error) => {
+        this.toastr.error('Error' + error.message);
+      }
+    );
   }
 
   onSubmit() {
@@ -45,14 +61,17 @@ export class AddJobPostingComponent implements OnInit {
         ...this.jobPostingForm.getRawValue(),
         "employerId" : this.employerId
       }
-      this.addJobService.addJobPosting(this.employerId, this.request ).subscribe(data => {
-        this.toastr.success('Job posting created successfully', data.message);
+      this.updateJobService.updateJobPosting(this.currentJobId, this.request ).subscribe(data => {
+        this.toastr.success('Success' + data);
+        console.log(data)
       },
       (error) => {
-        this.toastr.error('Create new job posting failed', error.message);
+        console.error(error.message)
+        this.toastr.error('Error' + error.message);
       })
     }else{
       console.warn("Submit : Invalid Form" )
+      this.toastr.error('Error');
     }
   }
 
