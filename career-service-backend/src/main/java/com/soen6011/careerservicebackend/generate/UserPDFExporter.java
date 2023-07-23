@@ -17,7 +17,7 @@ public class UserPDFExporter {
         this.user = user;
     }
 
-    private void writeTableHeader(PdfPTable table) {
+    public void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(new Color(10, 102, 194));
         cell.setPadding(5);
