@@ -140,7 +140,9 @@ export class CreateProfileComponent implements OnInit {
     this.createProfileService.generateResume(this.loggedUser.userId).subscribe(
       (response: any) => {
         this.toastr.success('Resume successfully Generated', 'Success'); // Show success message using Toastr
-        this._router.navigateByUrl('/create-profile')
+        var blob = new Blob([response], {type: "application/pdf"});
+        var objectUrl = URL.createObjectURL(blob);
+        window.open(objectUrl);
       },
       (error: any) => { 
         console.error('File upload failed', error);
