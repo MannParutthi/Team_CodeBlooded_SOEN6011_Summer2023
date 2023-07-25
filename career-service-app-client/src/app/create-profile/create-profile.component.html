@@ -53,6 +53,10 @@
           <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile"
             style="margin-top: 20px;">Upload</button>
         </div>
+        <div appearance="outline" class="field" style="margin-top: 20px;">
+          <h2>Generate Resume</h2>
+          <a id="generateButton" mat-raised-button color="primary" (click)="onGenerate()">Generate</a>
+        </div>
       </div>
 
       <button mat-raised-button color="primary" (click)="updateProfile()" [disabled]="candidateProfileForm.invalid">
