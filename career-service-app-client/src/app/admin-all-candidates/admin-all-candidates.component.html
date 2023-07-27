@@ -1,0 +1,16 @@
+<div class="container">
+  <div *ngFor="let candidate of candidatesList">
+    <mat-card class="candidate-data">
+      <mat-card-content>
+        <div class="candidate-name">{{ candidate.firstName  + ' ' + candidate.lastName}}</div>
+        <div class="candidate-emailId"><b>Email Id:</b> {{ candidate.emailId }}</div>
+        <div class="candidate-education"> <b>Highest Qualification:</b> {{ candidate.education }}</div>
+        <div class="candidate-experience"><b>Years of Experience:</b> {{ candidate.experience }} yrs</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="updateCandidate(candidate.userId)">Update</button>
+        <button mat-raised-button color="primary" (click)="deleteCandidate(candidate.userId)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

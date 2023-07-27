@@ -33,6 +33,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { FooterComponent } from './footer/footer.component';
 import { EmployerJobDetailComponent } from './employer-job-details/employer-job-details.component';
+import { AdminAllJobsComponent } from './admin-all-jobs/admin-all-jobs.component';
+import { AdminAllEmployersComponent } from './admin-all-employers/admin-all-employers.component';
+import { AdminAllCandidatesComponent } from './admin-all-candidates/admin-all-candidates.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { EmployerJobDetailComponent } from './employer-job-details/employer-job-
     UserLoginComponent,
     UserSignupComponent,
     FooterComponent,
+    AdminAllJobsComponent,
+    AdminAllEmployersComponent,
+    AdminAllCandidatesComponent,
   ],
   imports: [
     BrowserModule,
