@@ -38,7 +38,11 @@ public class BaseService {
             savedUser = candidateRepository.findByEmailId(request.getEmailId().toLowerCase(Locale.ROOT));
         } else if (authorityName == Authority.ROLE_EMPLOYER) {
             savedUser = employerRepository.findByEmailId(request.getEmailId().toLowerCase(Locale.ROOT));
-        } else {
+        }
+        else if (authorityName == Authority.ROLE_ADMIN) {
+            savedUser = employerRepository.findByEmailId(request.getEmailId().toLowerCase(Locale.ROOT));
+        }
+        else {
             return createErrorLoginResponse("Invalid authority! Please try again.");
         }
 

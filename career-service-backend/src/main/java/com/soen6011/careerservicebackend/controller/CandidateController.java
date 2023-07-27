@@ -141,10 +141,15 @@ public class CandidateController {
     public ResponseEntity<ByteArrayResource> download(@PathVariable String candidateId) throws IOException {
         LoadFile loadFile = candidateService.downloadCandidateResume(candidateId);
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(loadFile.getFileType() ))
+
+        ResponseEntity<ByteArrayResource> body = ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(loadFile.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + loadFile.getFilename() + "\"")
                 .body(new ByteArrayResource(loadFile.getFile()));
+
+        System.out.println("Returned for "+candidateId);
+
+        return body;
     }
 
     @GetMapping("/{candidateId}/resume/generate")
