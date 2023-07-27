@@ -1,6 +1,8 @@
 package com.soen6011.careerservicebackend.controller;
 
 import com.soen6011.careerservicebackend.common.Authority;
+import com.soen6011.careerservicebackend.error.ErrorMessage;
+import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.model.Candidate;
 import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
@@ -137,12 +139,16 @@ public class EmployerController {
     }
 
     @DeleteMapping(value ="/{employerId}")
-    public ResponseEntity<String> deleteEmployer(@PathVariable String employerId) {
+    public ResponseEntity<ErrorMessage> deleteEmployer(@PathVariable String employerId) {
         try {
             employerService.deleteEmployer(employerId);
-            return new ResponseEntity<>("Employer deleted successfully", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Failed to delete Employer", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.ok(new ErrorMessage("Employer deleted successfully"));
+        }
+        catch(ResourceNotFoundException e){
+            return new ResponseEntity<>(new ErrorMessage(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new ErrorMessage("Failed to delete Employer"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
