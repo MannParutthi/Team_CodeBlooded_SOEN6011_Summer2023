@@ -41,7 +41,7 @@ public class EmployerService {
     public void deleteEmployer(String employerId) throws Exception {
         Optional<Employer> employee =  employerRepository.findById(employerId);
         if(!employee.isPresent()) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("Employee Not Found");
         }
             try {
                 employerRepository.deleteById(employerId);
