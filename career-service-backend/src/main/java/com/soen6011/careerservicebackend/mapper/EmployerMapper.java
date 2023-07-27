@@ -27,12 +27,21 @@ public class EmployerMapper implements UserMapper {
         EmployerProfileResponse employerProfileResponse = new EmployerProfileResponse();
         employerProfileResponse.setWebsite(employer.getWebsite());
         employerProfileResponse.setCompanyName(employer.getCompanyName());
+        return employerProfileResponse;
+    }
+
+    public EmployerProfileResponse toEmployerProfileResponseExceptPassword(Employer employer) {
+
+        EmployerProfileResponse employerProfileResponse = new EmployerProfileResponse();
+        employerProfileResponse.setWebsite(employer.getWebsite());
+        employerProfileResponse.setCompanyName(employer.getCompanyName());
         employerProfileResponse.setEmailId(employer.getEmailId());
+        employerProfileResponse.setEmployerId(employer.getUserId());
         return employerProfileResponse;
     }
 
     public List<EmployerProfileResponse> toEmployerProfileResponses(List<Employer> employers) {
-       return employers.stream().map(employer -> toEmployerProfileResponse(employer)).collect(Collectors.toList());
+       return employers.stream().map(employer -> toEmployerProfileResponseExceptPassword(employer)).collect(Collectors.toList());
     }
 
     public Employer fromEmployerUpdateRequest(Employer employer, EmployerUpdateRequest employerUpdateRequest) {
