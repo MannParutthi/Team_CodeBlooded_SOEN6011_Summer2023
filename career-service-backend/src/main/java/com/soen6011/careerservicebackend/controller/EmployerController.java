@@ -131,6 +131,11 @@ public class EmployerController {
         return employerService.getProfileCard(employerId);
     }
 
+    @GetMapping
+    public ResponseEntity<List<EmployerProfileResponse>> getAllEmployers() {
+       return ResponseEntity.ok(employerService.getAllEmployers());
+    }
+
     @PatchMapping(value = "/{employerId}/profile")
     public EmployerProfileResponse updateProfile(@PathVariable String employerId, @RequestBody EmployerUpdateRequest userUpdateRequest) {
         return employerService.updateProfile(employerId, userUpdateRequest);
