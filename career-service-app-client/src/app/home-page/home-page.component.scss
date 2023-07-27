@@ -94,3 +94,68 @@
   background-color: #77766f; /* Set your desired card color here */
   color: white; /* Set the text color */
 }
+
+.welcome-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.welcome {
+  animation: color-change 1500ms infinite;
+  text-align: center;
+  font-size: 36px;
+}
+
+.slogan {
+  animation: color-change 1500ms infinite;
+  text-align: center;
+  font-size: 24px;
+}
+
+@keyframes color-change {
+  0% { color: maroon; }
+  25% { color: black; }
+  50% { color: goldenrod; }
+  75% { color: black; }
+  100% { color: maroon; }
+}
+
+.description {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.welcome-container h1,
+.welcome-container p {
+  opacity: 1;
+}
