@@ -7,6 +7,9 @@ import com.soen6011.careerservicebackend.response.EmployerProfileResponse;
 import com.soen6011.careerservicebackend.response.LoginResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class EmployerMapper implements UserMapper {
     @Override
@@ -25,6 +28,10 @@ public class EmployerMapper implements UserMapper {
         employerProfileResponse.setWebsite(employer.getWebsite());
         employerProfileResponse.setCompanyName(employer.getCompanyName());
         return employerProfileResponse;
+    }
+
+    public List<EmployerProfileResponse> toEmployerProfileResponses(List<Employer> employers) {
+       return employers.stream().map(employer -> toEmployerProfileResponse(employer)).collect(Collectors.toList());
     }
 
     public Employer fromEmployerUpdateRequest(Employer employer, EmployerUpdateRequest employerUpdateRequest) {

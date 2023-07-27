@@ -9,6 +9,9 @@ import com.soen6011.careerservicebackend.response.EmployerProfileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 public class EmployerService {
 
@@ -24,6 +27,14 @@ public class EmployerService {
         Employer employer = employerRepository.findById(employerId).orElseThrow(() -> new ResourceNotFoundException("Employer not found"));
 
         return employerMapper.toEmployerProfileResponse(employer);
+    }
+
+    public List<EmployerProfileResponse> getAllEmployers() {
+        List<Employer> employers = employerRepository.findAll();
+        if(employers == null || employers.size() == 0){
+           return Arrays.asList();
+        }
+        return employerMapper.toEmployerProfileResponses(employers);
     }
 
     public EmployerProfileResponse updateProfile(String employerId, EmployerUpdateRequest userUpdateRequest) {
