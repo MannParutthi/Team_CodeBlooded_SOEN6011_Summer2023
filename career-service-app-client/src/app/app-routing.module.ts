@@ -11,6 +11,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { EmployerJobDetailComponent } from './employer-job-details/employer-job-details.component';
 import { UpdateJobPostingComponent } from './update-job-posting/update-job-posting.component';
+import { AdminAllCandidatesComponent } from './admin-all-candidates/admin-all-candidates.component';
+import { AdminAllEmployersComponent } from './admin-all-employers/admin-all-employers.component';
+import { AdminAllJobsComponent } from './admin-all-jobs/admin-all-jobs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,8 +26,10 @@ const routes: Routes = [
   { path: "my-profile", component: CreateProfileComponent },
   { path: "add-job-posting", component: AddJobPostingComponent },
   { path: "update-job-posting", component: UpdateJobPostingComponent },
-  { path: "browse-candidates", component: BrowseCandidatesComponent },
   { path: "applied-jobs", component: AppliedJobsComponent },
+  { path: "admin-all-candidates", component: AdminAllCandidatesComponent },
+  { path: "admin-all-employers", component: AdminAllEmployersComponent },
+  { path: "admin-all-postings", component: AdminAllJobsComponent },
   { path: "**", redirectTo: 'home' }
 ];
 

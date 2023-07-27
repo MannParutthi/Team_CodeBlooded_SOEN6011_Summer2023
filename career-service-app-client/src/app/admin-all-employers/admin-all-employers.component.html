@@ -1,0 +1,16 @@
+<div class="container">
+  <div *ngFor="let emp of employersList">
+    <mat-card class="emp-data">
+      <mat-card-content>
+        <div class="emp-company">{{ emp.companyName }}</div>
+        <div class="emp-id"><b>Employer Id:</b> {{emp.employerId}}</div>
+        <div class="emp-website"><b>Company Website:</b> {{ emp.website }}</div>
+        <div class="emp-emailId"><b>Email Id:</b> {{ emp.emailId }}</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="updateEmp(emp.employerId)">Update</button>
+        <button mat-raised-button color="primary" (click)="deleteEmp(emp.employerId)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
