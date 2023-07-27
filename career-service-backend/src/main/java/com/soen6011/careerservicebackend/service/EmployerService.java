@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployerService {
@@ -38,6 +39,10 @@ public class EmployerService {
     }
 
     public void deleteEmployer(String employerId) throws Exception {
+        Optional<Employer> employee =  employerRepository.findById(employerId);
+        if(!employee.isPresent()) {
+            throw new ResourceNotFoundException();
+        }
             try {
                 employerRepository.deleteById(employerId);
             } catch (Exception e) {
