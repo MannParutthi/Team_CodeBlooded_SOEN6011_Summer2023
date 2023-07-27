@@ -9,4 +9,5 @@ public class EmployerProfileResponse {
     private String companyName;
     private String website;
     private String emailId;
+    private String employerId;
 }

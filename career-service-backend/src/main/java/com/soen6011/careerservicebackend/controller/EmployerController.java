@@ -136,6 +136,16 @@ public class EmployerController {
        return ResponseEntity.ok(employerService.getAllEmployers());
     }
 
+    @DeleteMapping(value ="/{employerId}")
+    public ResponseEntity<String> deleteEmployer(@PathVariable String employerId) {
+        try {
+            employerService.deleteEmployer(employerId);
+            return new ResponseEntity<>("Employer deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete Employer", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PatchMapping(value = "/{employerId}/profile")
     public EmployerProfileResponse updateProfile(@PathVariable String employerId, @RequestBody EmployerUpdateRequest userUpdateRequest) {
         return employerService.updateProfile(employerId, userUpdateRequest);

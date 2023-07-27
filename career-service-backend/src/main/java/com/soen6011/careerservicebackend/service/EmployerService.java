@@ -37,6 +37,14 @@ public class EmployerService {
         return employerMapper.toEmployerProfileResponses(employers);
     }
 
+    public void deleteEmployer(String employerId) throws Exception {
+            try {
+                employerRepository.deleteById(employerId);
+            } catch (Exception e) {
+                throw new Exception("Failed to delete Employer");
+            }
+        }
+
     public EmployerProfileResponse updateProfile(String employerId, EmployerUpdateRequest userUpdateRequest) {
 
         Employer employer = employerRepository.findById(employerId).orElseThrow(() -> new ResourceNotFoundException("Employer not found"));

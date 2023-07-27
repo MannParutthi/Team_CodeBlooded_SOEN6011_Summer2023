@@ -31,7 +31,6 @@ public class JobService {
     }
 
     public void deleteJob(String jobId) throws Exception {
-        jobRepository.deleteById(jobId);
 
         try {
             jobRepository.deleteById(jobId);
