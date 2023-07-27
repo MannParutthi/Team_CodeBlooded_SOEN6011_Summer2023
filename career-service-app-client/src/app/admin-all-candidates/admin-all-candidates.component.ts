@@ -42,10 +42,10 @@ export class AdminAllCandidatesComponent implements OnInit {
     this.adminCandidateService.deleteCandidate(candidateId).subscribe(
       (data) => {
         this.candidatesList = this.candidatesList.filter((emp) => emp.userId !== candidateId);
-        this.toastr.success('Success' + data);
+        this.toastr.success(data.message);
       },
       (error) => {
-        this.toastr.error('Error occured' + error.message);
+        this.toastr.error('Error occured: ' + error.message);
       }
     );
   }
