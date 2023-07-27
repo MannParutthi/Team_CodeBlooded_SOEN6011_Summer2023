@@ -27,6 +27,7 @@ public class EmployerMapper implements UserMapper {
         EmployerProfileResponse employerProfileResponse = new EmployerProfileResponse();
         employerProfileResponse.setWebsite(employer.getWebsite());
         employerProfileResponse.setCompanyName(employer.getCompanyName());
+        employerProfileResponse.setEmailId(employer.getEmailId());
         return employerProfileResponse;
     }
 
