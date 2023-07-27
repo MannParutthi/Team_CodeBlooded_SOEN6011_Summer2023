@@ -14,7 +14,6 @@ public class Candidate extends User {
     private String firstName;
     private String lastName;
     private String education;
-    private List<String> skills;
     private Integer experience;
-    private MultipartFile resume;
+    private String resumeId;
 }
