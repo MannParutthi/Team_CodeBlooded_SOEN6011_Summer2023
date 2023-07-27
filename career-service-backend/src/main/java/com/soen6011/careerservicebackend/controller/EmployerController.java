@@ -4,11 +4,14 @@ import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.model.Candidate;
 import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
+import com.soen6011.careerservicebackend.request.EmployerUpdateRequest;
 import com.soen6011.careerservicebackend.request.LoginRequest;
+import com.soen6011.careerservicebackend.response.EmployerProfileResponse;
 import com.soen6011.careerservicebackend.response.JobApplicationsResponse;
 import com.soen6011.careerservicebackend.response.LoginResponse;
 import com.soen6011.careerservicebackend.service.ApplicationService;
 import com.soen6011.careerservicebackend.service.BaseService;
+import com.soen6011.careerservicebackend.service.EmployerService;
 import com.soen6011.careerservicebackend.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employer")
+@CrossOrigin("http://localhost:4200")
 public class EmployerController {
 
     //TODO: For CICD test - will be deleted
@@ -36,11 +40,14 @@ public class EmployerController {
 
     private final BaseService baseService;
 
+    private final EmployerService employerService;
+
     @Autowired
-    public EmployerController(JobService jobService, ApplicationService applicationService, BaseService baseService) {
+    public EmployerController(JobService jobService, ApplicationService applicationService, BaseService baseService, EmployerService employerService) {
         this.jobService = jobService;
         this.applicationService = applicationService;
         this.baseService = baseService;
+        this.employerService = employerService;
     }
 
     @PostMapping("/login")
@@ -67,20 +74,32 @@ public class EmployerController {
 
     @PostMapping("/jobs")
     public ResponseEntity<String> addJob(@Valid @RequestBody Job job) {
-        jobService.addJob(job);
-        return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
+        try {
+            jobService.addJob(job);
+            return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to add job", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/jobs/{jobId}")
     public ResponseEntity<String> deleteJob(@PathVariable String jobId) {
-        jobService.deleteJob(jobId);
-        return new ResponseEntity<>("Job deleted successfully", HttpStatus.OK);
+        try {
+            jobService.deleteJob(jobId);
+            return new ResponseEntity<>("Job deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete job", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/jobs/{jobId}")
     public ResponseEntity<String> updateJob(@PathVariable String jobId, @RequestBody Job updatedJob) {
-        jobService.updateJob(jobId, updatedJob);
-        return new ResponseEntity<>("Job updated successfully", HttpStatus.OK);
+        try {
+            jobService.updateJob(jobId, updatedJob);
+            return new ResponseEntity<>("Job updated successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete job", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{employerId}/jobs")
@@ -105,5 +124,30 @@ public class EmployerController {
         response.setCandidates(candidates);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{employerId}/profile")
+    public EmployerProfileResponse getProfileCard(@PathVariable String employerId) {
+        return employerService.getProfileCard(employerId);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EmployerProfileResponse>> getAllEmployers() {
+       return ResponseEntity.ok(employerService.getAllEmployers());
+    }
+
+    @PatchMapping(value = "/{employerId}/profile")
+    public EmployerProfileResponse updateProfile(@PathVariable String employerId, @RequestBody EmployerUpdateRequest userUpdateRequest) {
+        return employerService.updateProfile(employerId, userUpdateRequest);
+    }
+
+    @GetMapping("/{employerId}")
+    public ResponseEntity<Employer> getEmployer(@PathVariable String employerId) {
+        Employer employer = employerService.getEmployer(employerId);
+        if (employer != null) {
+            return new ResponseEntity<>(employer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -1,26 +1,11 @@
 <div class="container">
   <form [formGroup]="jobPostingForm" class="form">
-    <mat-form-field appearance="outline" class="field">
-      <mat-label>Job ID</mat-label>
-      <input matInput formControlName="jobId" placeholder="Enter Job ID">
-      <mat-error *ngIf="jobPostingForm.controls['jobId'].invalid && jobPostingForm.controls['jobId'].touched">
-        Job ID is required
-      </mat-error>
-    </mat-form-field>
 
     <mat-form-field appearance="outline" class="field">
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title" placeholder="Enter Title">
-      <mat-error *ngIf="jobPostingForm.controls['title'].invalid && jobPostingForm.controls['title'].touched">
-        Title is required
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="field">
-      <mat-label>Company</mat-label>
-      <input matInput formControlName="company" placeholder="Enter Company">
-      <mat-error *ngIf="jobPostingForm.controls['company'].invalid && jobPostingForm.controls['company'].touched">
-        Company is required
+      <mat-label>Position</mat-label>
+      <input matInput formControlName="position" placeholder="Enter position">
+      <mat-error *ngIf="jobPostingForm.controls['position'].invalid && jobPostingForm.controls['position'].touched">
+        Position is required
       </mat-error>
     </mat-form-field>
 
@@ -41,24 +26,14 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="field">
-      <mat-label>Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Enter Date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="jobPostingForm.controls['date'].invalid && jobPostingForm.controls['date'].touched">
-        Date is required
+      <mat-label>Requirements</mat-label>
+      <textarea matInput formControlName="requirements" placeholder="Enter requirements"></textarea>
+      <mat-error *ngIf="jobPostingForm.controls['requirements'].invalid && jobPostingForm.controls['requirements'].touched">
+        Requirements is required
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="field">
-      <mat-label>Salary Range</mat-label>
-      <input matInput formControlName="salaryRange" placeholder="Enter Salary Range">
-      <mat-error *ngIf="jobPostingForm.controls['salaryRange'].invalid && jobPostingForm.controls['salaryRange'].touched">
-        Salary Range is required
-      </mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="jobPostingForm.invalid">
+    <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="jobPostingForm.invalid">
       Submit
     </button>
   </form>

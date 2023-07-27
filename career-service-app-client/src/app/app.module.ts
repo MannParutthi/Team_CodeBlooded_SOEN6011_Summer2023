@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +26,13 @@ import { BrowseJobsComponent } from './browse-jobs/browse-jobs.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { BrowseCandidatesComponent } from './browse-candidates/browse-candidates.component';
 import { AddJobPostingComponent } from './add-job-posting/add-job-posting.component';
+import { UpdateJobPostingComponent } from './update-job-posting/update-job-posting.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { EmployerJobsComponent } from './employer-job-posting/employer-job-posting.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserSignupComponent } from './user-signup/user-signup.component';
+import { FooterComponent } from './footer/footer.component';
+import { EmployerJobDetailComponent } from './employer-job-details/employer-job-details.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +42,13 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
     CreateProfileComponent,
     BrowseCandidatesComponent,
     AddJobPostingComponent,
+    UpdateJobPostingComponent, 
     AppliedJobsComponent,
+    EmployerJobsComponent,
+    EmployerJobDetailComponent,
+    UserLoginComponent,
+    UserSignupComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +71,7 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
     MatCardModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    MatDialogModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

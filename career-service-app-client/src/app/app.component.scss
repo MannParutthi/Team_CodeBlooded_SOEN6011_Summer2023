@@ -113,3 +113,20 @@
     flex: 1;
   }
 }
+
+.content {
+  min-height: calc(100vh - 50px); /* Adjust this value to leave space for the footer */
+}
+
+footer {
+  background-color: #766666;
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.content {
+  margin-bottom: 200px; /* Adjust this value to set the desired gap */
+}

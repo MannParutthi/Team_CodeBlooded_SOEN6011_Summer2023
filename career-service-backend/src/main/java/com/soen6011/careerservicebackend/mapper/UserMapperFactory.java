@@ -7,9 +7,10 @@ public class UserMapperFactory {
     public static UserMapper getUserMapper(Authority authorityName) {
         if (authorityName == Authority.ROLE_CANDIDATE) {
             return new CandidateMapper();
-        } else if (authorityName == Authority.ROLE_EMPLOYER) {
+        } else if (authorityName == Authority.ROLE_EMPLOYER || authorityName == Authority.ROLE_ADMIN) {
             return new EmployerMapper();
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Invalid authority!");
         }
     }
