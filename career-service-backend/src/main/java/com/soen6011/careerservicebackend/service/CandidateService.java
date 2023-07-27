@@ -12,6 +12,9 @@ import com.soen6011.careerservicebackend.repository.JobRepository;
 import com.soen6011.careerservicebackend.request.CandidateUpdateRequest;
 import com.soen6011.careerservicebackend.response.CandidateProfileResponse;
 import com.soen6011.careerservicebackend.response.LoadFile;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -144,5 +147,9 @@ public class CandidateService {
 
         return candidateMapper.toCandidateProfileResponse(updatedCandidate);
 
+    }
+    
+    public Page<Candidate> getAllCandidates(Pageable pageable) {
+    	return  candidateRepository.findAll(pageable);
     }
 }

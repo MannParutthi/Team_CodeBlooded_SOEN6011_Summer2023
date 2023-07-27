@@ -189,5 +189,12 @@ public class CandidateController {
     public CandidateProfileResponse updateProfile(@PathVariable String candidateId, @RequestBody CandidateUpdateRequest candidateUpdateRequest) {
         return candidateService.updateProfile(candidateId, candidateUpdateRequest);
     }
+    
+    @GetMapping("/allCandidates")
+    public ResponseEntity<Page<Candidate>> getAllCandidates(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+    	Pageable pageable = PageRequest.of(page, size);
+        Page<Candidate> candidates = candidateService.getAllCandidates(pageable);
+        return new ResponseEntity<>(candidates, HttpStatus.OK);
+    }
 
 }
