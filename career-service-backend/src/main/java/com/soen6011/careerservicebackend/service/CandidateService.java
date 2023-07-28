@@ -152,4 +152,13 @@ public class CandidateService {
     public Page<Candidate> getAllCandidates(Pageable pageable) {
     	return  candidateRepository.findAll(pageable);
     }
+    
+    public void deleteCandidate(String userId) throws Exception {
+
+        try {
+            candidateRepository.deleteById(userId);
+        } catch (Exception e) {
+            throw new Exception("Failed to delete candidate");
+        }
+    }
 }

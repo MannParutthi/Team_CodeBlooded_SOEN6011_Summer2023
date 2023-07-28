@@ -196,5 +196,15 @@ public class CandidateController {
         Page<Candidate> candidates = candidateService.getAllCandidates(pageable);
         return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
+    
+    @DeleteMapping("/candidate/{userId}")
+    public ResponseEntity<String> deleteCandidate(@PathVariable String userId) {
+        try {
+            candidateService.deleteCandidate(userId);
+            return new ResponseEntity<>("Candidate deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete candidate", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
