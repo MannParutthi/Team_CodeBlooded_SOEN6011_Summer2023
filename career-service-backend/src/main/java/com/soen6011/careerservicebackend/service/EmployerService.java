@@ -1,5 +1,6 @@
 package com.soen6011.careerservicebackend.service;
 
+import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.mapper.EmployerMapper;
 import com.soen6011.careerservicebackend.model.Employer;
@@ -31,7 +32,7 @@ public class EmployerService {
     }
 
     public List<EmployerProfileResponse> getAllEmployers() {
-        List<Employer> employers = employerRepository.findAll();
+        List<Employer> employers = employerRepository.findAllByAuthorityNot(Authority.ROLE_ADMIN);
         if(employers == null || employers.size() == 0){
            return Arrays.asList();
         }
