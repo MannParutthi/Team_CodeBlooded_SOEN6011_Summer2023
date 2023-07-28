@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ApplicationRepository extends MongoRepository<Application, String> {
@@ -16,5 +17,7 @@ public interface ApplicationRepository extends MongoRepository<Application, Stri
     boolean existsByJobIdAndCandidateId(String jobId, String candidateId);
 
     List<Application> findByCandidateId(String candidateId);
+
+    Optional<Application> findByCandidateIdAndJobId(String candidateId, String jobId);
 
 }

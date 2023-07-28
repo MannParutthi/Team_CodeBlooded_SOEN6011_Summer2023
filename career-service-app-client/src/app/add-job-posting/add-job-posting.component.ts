@@ -32,7 +32,9 @@ export class AddJobPostingComponent implements OnInit {
   
   ngOnInit(): void {
     this.loggedUser = localStorage.getItem("user"); // Get user data from local storage
+    this.loggedUser = JSON.parse(this.loggedUser)
     this.currentJobId =  localStorage.getItem("currentJobId"); // Get user data from local storage
+    this.employerId = this.loggedUser.userId;
     if (!this.loggedUser) {
       this._router.navigateByUrl('/home'); // If user is not logged in, redirect to the login page
     }
@@ -45,6 +47,7 @@ export class AddJobPostingComponent implements OnInit {
         ...this.jobPostingForm.getRawValue(),
         "employerId" : this.employerId
       }
+      console.log(this.request);
       this.addJobService.addJobPosting(this.employerId, this.request ).subscribe(data => {
         this.toastr.success('Job posting created successfully', data.message);
       },
