@@ -153,10 +153,13 @@ public class CandidateService {
     	return  candidateRepository.findAll(pageable);
     }
     
-    public void deleteCandidate(String userId) throws Exception {
+    public void deleteCandidate(String candidateId) throws Exception {
 
         try {
-            candidateRepository.deleteById(userId);
+        	Candidate candidate = candidateRepository.findById(candidateId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+        	applicationRepository.deleteByCandidateId(candidateId);
+            candidateRepository.deleteById(candidateId);
         } catch (Exception e) {
             throw new Exception("Failed to delete candidate");
         }
