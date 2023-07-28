@@ -74,7 +74,7 @@ export class EmployerJobDetailComponent implements OnInit {
         let a = document.getElementById('downloadButton');
         if (a instanceof HTMLAnchorElement) {
           a.href = url;
-          a.download = res.filename;
+          a.download = "resume.pdf";
         }
       },
       (error: any) => { 

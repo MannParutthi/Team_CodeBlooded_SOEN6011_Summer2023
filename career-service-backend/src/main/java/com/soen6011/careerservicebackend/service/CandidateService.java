@@ -148,7 +148,18 @@ public class CandidateService {
         return candidateMapper.toCandidateProfileResponse(updatedCandidate);
 
     }
-    
+
+    public void updateApplicationStatus(String candidateId, String jobId, ApplicationStatus status) {
+        Candidate candidate = candidateRepository.findById(candidateId)
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+
+        Application application = applicationRepository.findByCandidateIdAndJobId(candidateId,jobId).orElseThrow(() -> new ResourceNotFoundException("Application not found"));
+
+        application.setStatus(status);
+        applicationRepository.save(application);
+    }
+
+
     public Page<Candidate> getAllCandidates(Pageable pageable) {
     	return  candidateRepository.findAll(pageable);
     }

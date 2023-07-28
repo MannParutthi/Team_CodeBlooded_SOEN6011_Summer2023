@@ -1,5 +1,6 @@
 package com.soen6011.careerservicebackend.controller;
 
+import com.soen6011.careerservicebackend.common.ApplicationStatus;
 import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.generate.UserPDFExporter;
@@ -8,6 +9,7 @@ import com.soen6011.careerservicebackend.model.Candidate;
 import com.soen6011.careerservicebackend.model.Job;
 import com.soen6011.careerservicebackend.request.CandidateUpdateRequest;
 import com.soen6011.careerservicebackend.request.LoginRequest;
+import com.soen6011.careerservicebackend.request.UpdateStatusRequest;
 import com.soen6011.careerservicebackend.response.ApplicationResponse;
 import com.soen6011.careerservicebackend.response.CandidateProfileResponse;
 import com.soen6011.careerservicebackend.response.LoadFile;
@@ -129,6 +131,19 @@ public class CandidateController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/{candidateId}/applications/{jobId}/status")
+    public ResponseEntity<String> updateApplicationStatus(@PathVariable String candidateId,
+                                                          @PathVariable String jobId,
+                                                          @RequestBody UpdateStatusRequest request) {
+        try {
+            candidateService.updateApplicationStatus(candidateId, jobId, request.getStatus());
+            return new ResponseEntity<>("Application status updated successfully", HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>("Candidate or application not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping("/alljobs")
     public ResponseEntity<Page<Job>> getAllJobs(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
