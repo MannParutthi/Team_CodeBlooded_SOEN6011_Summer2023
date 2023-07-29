@@ -17,6 +17,8 @@ public interface ApplicationRepository extends MongoRepository<Application, Stri
     boolean existsByJobIdAndCandidateId(String jobId, String candidateId);
 
     List<Application> findByCandidateId(String candidateId);
+    
+    void deleteByCandidateId(String candidateId);
 
     Optional<Application> findByCandidateIdAndJobId(String candidateId, String jobId);
 

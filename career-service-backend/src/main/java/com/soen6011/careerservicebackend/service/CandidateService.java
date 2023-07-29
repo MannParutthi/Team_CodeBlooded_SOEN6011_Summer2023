@@ -163,4 +163,16 @@ public class CandidateService {
     public Page<Candidate> getAllCandidates(Pageable pageable) {
     	return  candidateRepository.findAll(pageable);
     }
+    
+    public void deleteCandidate(String candidateId) throws Exception {
+
+        try {
+        	Candidate candidate = candidateRepository.findById(candidateId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+        	applicationRepository.deleteByCandidateId(candidateId);
+            candidateRepository.deleteById(candidateId);
+        } catch (Exception e) {
+            throw new Exception("Failed to delete candidate");
+        }
+    }
 }
