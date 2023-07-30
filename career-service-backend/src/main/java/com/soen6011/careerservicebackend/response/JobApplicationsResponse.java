@@ -10,5 +10,5 @@ import java.util.List;
 @Setter
 public class JobApplicationsResponse {
     private String jobId;
-    private List<Candidate> candidates;
+    private List<CandidateApplicationStatus> candidates;
 }
