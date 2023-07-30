@@ -8,6 +8,7 @@ import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
 import com.soen6011.careerservicebackend.request.EmployerUpdateRequest;
 import com.soen6011.careerservicebackend.request.LoginRequest;
+import com.soen6011.careerservicebackend.response.CandidateApplicationStatus;
 import com.soen6011.careerservicebackend.response.EmployerProfileResponse;
 import com.soen6011.careerservicebackend.response.JobApplicationsResponse;
 import com.soen6011.careerservicebackend.response.LoginResponse;
@@ -119,11 +120,12 @@ public class EmployerController {
                                                                          @RequestParam(defaultValue = "0") Integer page,
                                                                          @RequestParam(defaultValue = "10") Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        List<Candidate> candidates = applicationService.getCandidateApplications(employerId, jobId, pageable);
+
+        List<CandidateApplicationStatus> candidateApplications = applicationService.getCandidateApplications(employerId, jobId, pageable);
 
         JobApplicationsResponse response = new JobApplicationsResponse();
         response.setJobId(jobId);
-        response.setCandidates(candidates);
+        response.setCandidates(candidateApplications);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -7,6 +7,7 @@ import com.soen6011.careerservicebackend.model.Employer;
 import com.soen6011.careerservicebackend.model.Job;
 import com.soen6011.careerservicebackend.repository.ApplicationRepository;
 import com.soen6011.careerservicebackend.response.ApplicationResponse;
+import com.soen6011.careerservicebackend.response.CandidateApplicationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,10 +38,17 @@ public class ApplicationService {
         this.jobService = jobService;
     }
 
-    public List<Candidate> getCandidateApplications(String employerId, String jobId, Pageable pageable) {
+    public List<CandidateApplicationStatus> getCandidateApplications(String employerId, String jobId, Pageable pageable) {
+
         Page<Application> applications = applicationRepository.findByEmployerIdAndJobId(employerId, jobId, pageable);
-        List<String> candidateIds = applications.stream().map(Application::getCandidateId).collect(Collectors.toList());
-        return candidateService.getCandidatesByIds(candidateIds);
+
+        List<CandidateApplicationStatus> candidates = applications.stream()
+                .map(app -> {
+                    Candidate candidate = candidateService.getCandidateById(app.getCandidateId());
+                    return new CandidateApplicationStatus(candidate, app.getStatus());
+                })
+                .collect(Collectors.toList());
+        return candidates;
     }
 
     public ApplicationResponse getApplication(String applicationId) {
