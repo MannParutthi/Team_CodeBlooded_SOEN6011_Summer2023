@@ -81,7 +81,7 @@ We will use Github Wiki since it is easily accessible and conveniently located w
 
 
 ### Candidate Generated Resume
-![image](generated-resume.png)
+![image](img/generated-resume.png)
 
 
 
