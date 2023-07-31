@@ -1,5 +1,6 @@
 package com.soen6011.careerservicebackend.service;
 
+import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.mapper.EmployerMapper;
 import com.soen6011.careerservicebackend.model.Employer;
@@ -88,6 +89,7 @@ public class EmployerServiceTest {
         // For example: expectedResponse.setCompanyName("Example Company");
         //                expectedResponse.setWebsite("www.example.com");
 
+        when(employerRepository.findAllByAuthorityNot(Authority.ROLE_ADMIN)).thenReturn(employers);
         when(employerMapper.toEmployerProfileResponses(employers)).thenReturn(Arrays.asList(expectedResponse));
 
         List<EmployerProfileResponse> actualResponses = employerService.getAllEmployers();
