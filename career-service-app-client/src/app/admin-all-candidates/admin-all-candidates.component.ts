@@ -36,13 +36,15 @@ export class AdminAllCandidatesComponent implements OnInit {
     this.adminCandidateService.getCandidate(candidateId).subscribe(
       (data: any) => {
         console.info(data);
+        data.authority = data.authority.substring(5,6).toUpperCase() + data.authority.substring(6).toLowerCase()
+        localStorage.setItem("adminUserUpdate", JSON.stringify(data))
       },
       (error: any) => {
         this.toastr.error('Error occured' + error.message);
       }
     );
     localStorage.setItem("currentCandidateId", candidateId.toString());
-    // this.router.navigate(['my-profile']); // edit my-profile component to show candidate details based on currentCandidateId
+    this.router.navigate(['my-profile']);
   }
 
   deleteCandidate(candidateId: number) {

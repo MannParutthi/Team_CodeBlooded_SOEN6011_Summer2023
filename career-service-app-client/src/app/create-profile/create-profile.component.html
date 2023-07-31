@@ -1,9 +1,10 @@
 <div class="container">
-  <ng-container *ngIf="loggedUser.authority === Authority.CANDIDATE || loggedUser.authority === Authority.ADMIN">
+  <ng-container *ngIf="loggedUser.authority === Authority.CANDIDATE || 
+                      (loggedUser.authority === Authority.ADMIN && adminUpdateUser.authority === Authority.CANDIDATE)">
     <form [formGroup]="candidateProfileForm">
       <mat-form-field appearance="outline" class="field">
         <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName" value="loggedUser.firstName" placeholder="Enter first name">
+        <input matInput formControlName="firstName" placeholder="Enter first name">
         <mat-error
           *ngIf="candidateProfileForm.controls['firstName'].invalid && candidateProfileForm.controls['firstName'].touched">
           First Name is required
@@ -19,9 +20,14 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="field">
+      <mat-form-field *ngIf="loggedUser.authority !== Authority.ADMIN" appearance="outline" class="field">
         <mat-label>Email</mat-label>
         <input matInput value="{{ loggedUser.emailId }}" placeholder="Enter email" readonly>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="loggedUser.authority === Authority.ADMIN" appearance="outline" class="field">
+        <mat-label>Email</mat-label>
+        <input matInput value="{{ adminUpdateUser.emailId }}" placeholder="Enter email" readonly>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="field">
@@ -66,11 +72,17 @@
 
 
   </ng-container>
-  <ng-container *ngIf="loggedUser.authority === Authority.EMPLOYER || loggedUser.authority === Authority.ADMIN">
+  <ng-container *ngIf="loggedUser.authority === Authority.EMPLOYER || 
+                (loggedUser.authority === Authority.ADMIN && adminUpdateUser.authority === Authority.EMPLOYER)">
     <form [formGroup]="employerProfileForm">
-      <mat-form-field appearance="outline" class="field">
+      <mat-form-field *ngIf="loggedUser.authority !== Authority.ADMIN" appearance="outline" class="field">
         <mat-label>Email</mat-label>
         <input matInput value="{{loggedUser.emailId}}" placeholder="Enter email" readonly>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="loggedUser.authority === Authority.ADMIN" appearance="outline" class="field">
+        <mat-label>Email</mat-label>
+        <input matInput value="{{adminUpdateUser.emailId}}" placeholder="Enter email" readonly>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="field">
