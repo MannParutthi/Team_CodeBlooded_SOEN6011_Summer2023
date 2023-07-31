@@ -33,6 +33,14 @@ export class AdminAllCandidatesComponent implements OnInit {
 
   updateCandidate(candidateId: number) {
     console.log('updateCandidate() called with empId: ' + candidateId);
+    this.adminCandidateService.getCandidate(candidateId).subscribe(
+      (data: any) => {
+        console.info(data);
+      },
+      (error: any) => {
+        this.toastr.error('Error occured' + error.message);
+      }
+    );
     localStorage.setItem("currentCandidateId", candidateId.toString());
     // this.router.navigate(['my-profile']); // edit my-profile component to show candidate details based on currentCandidateId
   }
