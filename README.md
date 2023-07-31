@@ -63,4 +63,8 @@ We will use Github Wiki since it is easily accessible and conveniently located w
 ![image](landingpage.PNG)
 
 
+### Candidate Generated Resume
+![image](generated-resume.png)
+
+
 
