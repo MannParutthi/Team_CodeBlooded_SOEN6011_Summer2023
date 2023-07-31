@@ -4,3 +4,17 @@ on:
   push:
   workflow_dispatch:
 
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 14.15
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.15
+    - name: Install dependencies
+    - run: cd career-service-app-client && npm install
+    - run: npm run test:prod
