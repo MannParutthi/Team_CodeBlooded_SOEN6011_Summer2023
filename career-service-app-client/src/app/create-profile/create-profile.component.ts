@@ -37,6 +37,7 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     // Check if the user is already logged in, if so, navigate to the home page
+    this.loggedUser = null
     this.Authority = Authority
     this.loggedUser = localStorage.getItem('user')
     this.adminUpdateUser = localStorage.getItem('adminUserUpdate')
@@ -142,14 +143,14 @@ export class CreateProfileComponent implements OnInit {
     }
     if ((this.loggedUser.authority === Authority.EMPLOYER || this.loggedUser.authority === Authority.ADMIN) && this.employerProfileForm.valid) {
       console.log(this.employerProfileForm.value);
-      this.createProfileService.updateEmployerProfile(this.loggedUser.userId, this.employerProfileForm.getRawValue()).subscribe(
+      this.createProfileService.updateEmployerProfile(this.updateUser.userId, this.employerProfileForm.getRawValue()).subscribe(
         (res: any) => {
           if (this.loggedUser.authority === Authority.ADMIN) {
             this.updateUser.companyName = res.companyName
             this.updateUser.website = res.website
             this.adminUpdateUser.companyName = res.companyName
             this.adminUpdateUser.website = res.website
-            localStorage.setItem("adminUpdateUser", JSON.stringify(this.adminUpdateUser))
+            localStorage.setItem("adminUserUpdate", JSON.stringify(this.adminUpdateUser))
           } else {
             this.loggedUser.companyName = res.companyName
             this.loggedUser.website = res.website

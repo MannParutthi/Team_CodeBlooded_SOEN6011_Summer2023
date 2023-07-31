@@ -19,6 +19,9 @@ export class AdminAllCandidatesComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = localStorage.getItem("user");
     this.loggedUser = JSON.parse(this.loggedUser);
+    if (this.loggedUser == null) {
+      this.router.navigateByUrl('/home');
+    }
 
     this.adminCandidateService.getAllCandidates().subscribe(
       (data: any) => {
@@ -38,13 +41,12 @@ export class AdminAllCandidatesComponent implements OnInit {
         console.info(data);
         data.authority = data.authority.substring(5,6).toUpperCase() + data.authority.substring(6).toLowerCase()
         localStorage.setItem("adminUserUpdate", JSON.stringify(data))
+        this.router.navigate(['my-profile'])
       },
       (error: any) => {
         this.toastr.error('Error occured' + error.message);
       }
     );
-    localStorage.setItem("currentCandidateId", candidateId.toString());
-    this.router.navigate(['my-profile']);
   }
 
   deleteCandidate(candidateId: number) {

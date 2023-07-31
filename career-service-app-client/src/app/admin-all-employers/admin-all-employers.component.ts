@@ -19,6 +19,9 @@ export class AdminAllEmployersComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = localStorage.getItem("user");
     this.loggedUser = JSON.parse(this.loggedUser);
+    if (this.loggedUser == null) {
+      this.router.navigateByUrl('/home');
+    }
 
     this.adminEmployerService.getAllEmployers().subscribe(
       (data: any) => {
@@ -33,8 +36,17 @@ export class AdminAllEmployersComponent implements OnInit {
 
   updateEmp(empId: number) {
     console.log('updateEmp() called with empId: ' + empId);
-    localStorage.setItem("currentEmpId", empId.toString());
-    // this.router.navigate(['my-profile']); // edit my-profile component to show employer details based on currentEmpId
+    this.adminEmployerService.getEmployer(empId).subscribe(
+      (data: any) => {
+        console.info(data);
+        data.authority = data.authority.substring(5,6).toUpperCase() + data.authority.substring(6).toLowerCase()
+        localStorage.setItem("adminUserUpdate", JSON.stringify(data))
+        this.router.navigate(['my-profile'])
+      },
+      (error: any) => {
+        this.toastr.error('Error occured' + error.message);
+      }
+    );
   }
 
   deleteEmp(empId: number) {

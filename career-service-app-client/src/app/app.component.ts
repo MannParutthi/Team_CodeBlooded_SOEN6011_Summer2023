@@ -24,7 +24,7 @@ export class AppComponent {
   logout() {
     localStorage.clear(); // Clear the user data from local storage
     this._router.navigateByUrl('/home'); // Navigate to the login page
-    window.location.reload()
+    setTimeout( () => window.location.reload(), 500)
   }
 
 }
