@@ -62,5 +62,22 @@ We will use Github Wiki since it is easily accessible and conveniently located w
 
 ![image](img/landingpage.png)
 
+## Candidate Sign up
+![image](img/candidate-signup.png)
+
+## Candidate Home page
+![image](img/candidate-home.png)
+
+## Candidate Profile Update
+![image](img/my-profile.png)
+
+## All Jobs
+![image](img/browsing.png)
+
+## Candidate Applied Jobs
+![image](img/applied-jobs.png)
+
+
+
 
 
