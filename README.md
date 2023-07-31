@@ -60,7 +60,7 @@ We will use Github Wiki since it is easily accessible and conveniently located w
 
 ### Career Services Application Website
 
-![image](landingpage.PNG)
+![image](img/landingpage.png)
 
 
 
