@@ -14,12 +14,19 @@
         <mat-card-content>
           <div class="candidate-details">
             <div class="candidate-info">
-              <div class="candidate-name">{{ candidate.firstName }}</div>
-              <div class="candidate-email">{{ candidate.emailId }}</div>
-              <div class="candidate-experience">Experience: {{ candidate.experience }} years</div>
+              <div class="candidate-name">{{ candidate.candidate.firstName }}</div>
+              <div class="candidate-email">{{ candidate.candidate.emailId }}</div>
+              <div class="candidate-experience">Experience: {{ candidate.candidate.experience }} years</div>
             </div>
             <div class="candidate-actions">
-              <a id="downloadButton" mat-raised-button color="primary" (click)="downloadResume(candidate.userId)">Download</a>
+              <a id="downloadButton" mat-raised-button color="primary" (click)="downloadResume(candidate.candidate.userId)">Download</a>
+              <mat-form-field>
+                <mat-label>{{candidate.applicationStatus}}</mat-label>
+                <mat-select #mySelect [(ngModel)]="candidate.status" (selectionChange)="onApplicationStatusChange(candidate.candidate, mySelect.value)">
+                  <mat-option *ngFor="let status of applicationStatuses" [value]="status">{{ status }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button *ngIf="statusChanged.userId === candidate.candidate.userId" mat-raised-button color="primary"  (click)="saveApplicationStatus(candidate.candidate, job.id)">Save</button>
             </div>
           </div>
         </mat-card-content>
