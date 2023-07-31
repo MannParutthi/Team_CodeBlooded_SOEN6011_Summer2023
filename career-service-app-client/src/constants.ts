@@ -5,15 +5,8 @@ export const Authority = {
 };
 
 export const Status = [
-     "Applied",
-     "Under Consideration",
-     "Interviewing",
-     "Selected",
-     "Rejected"
+     "APPLIED",
+     "INTERVIEW",
+     "OFFER",
+     "REJECTED"
 ]
-//     "APPLIED": "Applied",
-//     "UNDER CONSIDERATION": "Under Consideration",
-//     "INTERVIEWING" : "Interviewing",
-//     "SELECTED": "Selected",
-//     "REJECTED" : "Rejected"
-// };

@@ -43,3 +43,7 @@ h4 {
 .mat-card:not(:last-child) {
   margin-bottom: 10px;
 }
+
+.container .candidate-list .scrollable-list{
+  max-height: 40%; overflow-y: auto;
+}

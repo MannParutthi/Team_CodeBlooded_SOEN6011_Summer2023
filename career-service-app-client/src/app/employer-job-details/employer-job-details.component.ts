@@ -22,6 +22,11 @@ export class EmployerJobDetailComponent implements OnInit {
   candidateList: any[] = [];
   job : any;
   applicationStatuses : any;
+  statusChanged = {
+    userId : "",
+    status : ""
+  };
+  blob : any
 
   constructor(private employerJobDetailSevice: EmployerJobDetailService,  
     private employerSevice: EmployerService,
@@ -62,20 +67,16 @@ export class EmployerJobDetailComponent implements OnInit {
     localStorage.setItem("currentJobId", jobId.toString());
     this.router.navigate(['update-job-posting']);
   }
-
-  updateApplicationStatus(){
-    console.warn("updateApplicationStatus")
-  }
   
   downloadResume(userId : any){
     this.createProfileService.downloadResume(userId).subscribe(
       (res: any) => {
-        let url = window.URL.createObjectURL(res);
-        let a = document.getElementById('downloadButton');
-        if (a instanceof HTMLAnchorElement) {
-          a.href = url;
-          a.download = "resume.pdf";
-        }
+        this.blob = new Blob([res], {type: 'application/pdf'});
+        var downloadURL = window.URL.createObjectURL(res);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "resume.pdf";
+        link.click();
       },
       (error: any) => { 
         this.toastr.error('Resume download failed', 'Download Failed');
@@ -87,11 +88,32 @@ export class EmployerJobDetailComponent implements OnInit {
     console.log('deleteJob() called with jobId: ' + jobId);
     this.employerSevice.deleteEmployerJobPostings(jobId).subscribe(
       (data) => {
-        this.toastr.error('Error' + data);
+        this.toastr.error('Success' + data);
       },
       (error) => {
         this.toastr.error('Error' + error.message);
       }
     );
+  }
+
+  onApplicationStatusChange(candidate: any, value:string) {
+    console.log(`Application status changed for ${candidate.firstName} to ${value}`);
+    this.statusChanged.userId = candidate.userId;
+    this.statusChanged.status = value;
+  }
+
+  // Function to save the updated application status
+  saveApplicationStatus(candidate: any, jobId : any) {
+    console.log(`Saving application status ${candidate.status} for ${candidate.firstName}`);
+    this.employerJobDetailSevice.updateCandidateStatus(candidate.userId, jobId, this.statusChanged.status).subscribe(
+      (data) => {
+        console.log(data);
+        this.toastr.success(data);
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error('Error' + error.message);
+      }
+    ); 
   }
 }
