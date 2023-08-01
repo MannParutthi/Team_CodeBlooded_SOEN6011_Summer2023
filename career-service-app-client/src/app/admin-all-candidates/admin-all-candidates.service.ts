@@ -15,6 +15,10 @@ export class AdminAllCandidatesService {
     return this.http.get(`${this.baseUrl}/candidate/allCandidates`) as Observable<any>;
   }
 
+  getCandidate(candidateId: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/candidate/${candidateId}`) as Observable<any>;
+  }
+
   deleteCandidate(candidateId: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/candidate/${candidateId}`) as Observable<any>;
   }
