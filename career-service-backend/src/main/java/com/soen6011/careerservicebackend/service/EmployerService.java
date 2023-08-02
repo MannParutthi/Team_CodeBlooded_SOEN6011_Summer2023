@@ -4,7 +4,9 @@ import com.soen6011.careerservicebackend.common.Authority;
 import com.soen6011.careerservicebackend.exception.ResourceNotFoundException;
 import com.soen6011.careerservicebackend.mapper.EmployerMapper;
 import com.soen6011.careerservicebackend.model.Employer;
+import com.soen6011.careerservicebackend.repository.ApplicationRepository;
 import com.soen6011.careerservicebackend.repository.EmployerRepository;
+import com.soen6011.careerservicebackend.repository.JobRepository;
 import com.soen6011.careerservicebackend.request.EmployerUpdateRequest;
 import com.soen6011.careerservicebackend.response.EmployerProfileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class EmployerService {
 
     @Autowired
     EmployerRepository employerRepository;
+    @Autowired
+    JobRepository jobRepository;
+    @Autowired
+    ApplicationRepository applicationRepository;
 
     public EmployerProfileResponse getProfileCard(String employerId) {
 
@@ -45,6 +51,8 @@ public class EmployerService {
             throw new ResourceNotFoundException("Employee Not Found");
         }
             try {
+                applicationRepository.deleteByEmployerId(employerId);
+                jobRepository.deleteByEmployerId(employerId);
                 employerRepository.deleteById(employerId);
             } catch (Exception e) {
                 throw new Exception("Failed to delete Employer");
