@@ -16,6 +16,6 @@ export class AdminAllCandidatesService {
   }
 
   deleteCandidate(candidateId: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/candidate/${candidateId}`) as Observable<any>;
+    return this.http.delete(`${this.baseUrl}/candidate/${candidateId}`, {responseType: 'text'});
   }
 }

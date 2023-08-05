@@ -197,7 +197,7 @@ public class CandidateController {
         return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
     
-    @DeleteMapping("/candidate/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteCandidate(@PathVariable String userId) {
         try {
             candidateService.deleteCandidate(userId);
