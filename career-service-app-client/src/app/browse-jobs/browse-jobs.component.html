@@ -1,5 +1,29 @@
 <div class="container">
 
+  <div>
+    <form [formGroup]="searchForm">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <div fxFlex="70">
+          <mat-form-field appearance="outline" class="field">
+            <input matInput formControlName="searchKeyword" placeholder="Enter Keyword to Search ..." (input)="onSearchInputChange()">
+          </mat-form-field>
+        </div>
+        <div fxFlex="30">
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Filter by Attribute</mat-label>
+            <mat-select formControlName="filterAttribute" (selectionChange)="onFilterAttributeChange()">
+              <mat-option value="position">Position</mat-option>
+              <mat-option value="companyName">Company Name</mat-option>
+              <mat-option value="location">Location</mat-option>
+              <mat-option value="description">Description</mat-option>
+              <mat-option value="requirements">Requirements</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <div *ngFor="let job of allJobsList">
     <mat-card class="job-posting">
       <mat-card-content>
