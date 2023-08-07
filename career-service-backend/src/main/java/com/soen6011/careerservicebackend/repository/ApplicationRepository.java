@@ -20,6 +20,8 @@ public interface ApplicationRepository extends MongoRepository<Application, Stri
     
     void deleteByCandidateId(String candidateId);
 
+    void deleteByEmployerId(String employerId);
+
     Optional<Application> findByCandidateIdAndJobId(String candidateId, String jobId);
 
 }
