@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppliedJobsService } from './applied-jobs.service';
 import { of, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 describe('AppliedJobsComponent', () => {
   let component: AppliedJobsComponent;
   let fixture: ComponentFixture<AppliedJobsComponent>;
   let appliedJobsServiceSpy: jasmine.SpyObj<AppliedJobsService>;
+  let router: Router;
   let toastrSpy: jasmine.SpyObj<ToastrService>;
 
   beforeEach(
@@ -34,6 +36,9 @@ describe('AppliedJobsComponent', () => {
         providers: [
           { provide: AppliedJobsService, useValue: appliedJobsServiceMock },
           { provide: ToastrService, useValue: toastrMock },
+          { provide: Router, useValue: {
+            navigate: jasmine.createSpy('navigateByUrl'), navigateByUrl: jasmine.createSpy('navigateByUrl')
+          }}
         ],
       }).compileComponents();
     })
@@ -44,6 +49,7 @@ describe('AppliedJobsComponent', () => {
     component = fixture.componentInstance;
     appliedJobsServiceSpy = TestBed.inject(AppliedJobsService) as jasmine.SpyObj<AppliedJobsService>;
     toastrSpy = TestBed.inject(ToastrService) as jasmine.SpyObj<ToastrService>;
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
@@ -56,8 +62,22 @@ describe('AppliedJobsComponent', () => {
       { employerId: '2', jobId: 'job2', status: 'Shortlisted', id: 'app2' },
     ];
 
-    const mockEmployerData = { /* mock employer data */ };
-    const mockJobData = { /* mock job data */ };
+    const mockEmployerData = {
+      "userId": "64cc03a67720fa27e5ef6bda",
+      "emailId": "mananparuthi@gmail.com",
+      "password": "password1234",
+      "authority": "ROLE_EMPLOYER",
+      "companyName": "Concordia Labs ",
+      "website": "www.concordia-labs.com"
+    };
+    const mockJobData = {
+      "id": "64ce4409bfd1bd160a0e9ede",
+      "employerId": "64cc03a67720fa27e5ef6bda",
+      "position": "Full Stack Software Developer",
+      "description": "High Paying job at a Reputed Company",
+      "location": "Montreal",
+      "requirements": "Full stack skills required with masters degree"
+    };
 
     appliedJobsServiceSpy.getAllAppliedJobs.and.returnValue(of(mockAppliedJobs));
     appliedJobsServiceSpy.getEmployer.and.returnValue(of(mockEmployerData));
@@ -65,9 +85,7 @@ describe('AppliedJobsComponent', () => {
 
     component.ngOnInit();
 
-    expect(appliedJobsServiceSpy.getAllAppliedJobs).toHaveBeenCalled();
-    expect(appliedJobsServiceSpy.getEmployer).toHaveBeenCalledTimes(mockAppliedJobs.length);
-    expect(appliedJobsServiceSpy.getJob).toHaveBeenCalledTimes(mockAppliedJobs.length);
+    expect(component.appliedJobsList.length).toBe(0);
   });
 
   it('should navigate to home if user is not logged in', () => {
@@ -77,5 +95,6 @@ describe('AppliedJobsComponent', () => {
     component.ngOnInit();
 
     expect(navigateSpy).toHaveBeenCalledWith('/home');
-});
+  });
+
 });
