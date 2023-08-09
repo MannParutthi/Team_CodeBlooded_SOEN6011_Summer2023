@@ -5,9 +5,7 @@ import { BrowseJobsComponent } from './browse-jobs.component';
 import { BrowseJobsService } from './browse-jobs.service';
 import { AppliedJobsService } from '../applied-jobs/applied-jobs.service';
 import { FormBuilder } from '@angular/forms';
-import { of, throwError } from 'rxjs';
-import { Employer } from 'src/models/Employer';
-import { Job } from 'src/models/Job';
+
 
 describe('BrowseJobsComponent', () => {
   let component: BrowseJobsComponent;

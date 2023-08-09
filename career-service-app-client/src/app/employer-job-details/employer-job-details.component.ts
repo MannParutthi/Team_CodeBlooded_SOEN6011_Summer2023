@@ -108,6 +108,11 @@ export class EmployerJobDetailComponent implements OnInit {
     this.employerJobDetailSevice.updateCandidateStatus(candidate.userId, jobId, this.statusChanged.status).subscribe(
       (data) => {
         console.log(data);
+        this.statusChanged = { 
+            userId : "",
+            status : ""
+          };
+        
         this.toastr.success(data);
       },
       (error) => {

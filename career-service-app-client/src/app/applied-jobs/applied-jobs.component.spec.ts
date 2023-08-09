@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AppliedJobsComponent } from './applied-jobs.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppliedJobsService } from './applied-jobs.service';
 import { of, throwError } from 'rxjs';
 
@@ -22,8 +24,13 @@ describe('AppliedJobsComponent', () => {
       const toastrMock = jasmine.createSpyObj('ToastrService', ['error']);
 
       TestBed.configureTestingModule({
+        imports: [
+          ReactiveFormsModule,
+          RouterTestingModule,
+          HttpClientTestingModule,
+          ToastrModule.forRoot()
+        ],
         declarations: [AppliedJobsComponent],
-        imports: [RouterTestingModule, ToastrModule.forRoot()],
         providers: [
           { provide: AppliedJobsService, useValue: appliedJobsServiceMock },
           { provide: ToastrService, useValue: toastrMock },

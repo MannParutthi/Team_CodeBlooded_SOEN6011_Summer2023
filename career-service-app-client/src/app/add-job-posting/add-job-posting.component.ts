@@ -50,6 +50,7 @@ export class AddJobPostingComponent implements OnInit {
       console.log(this.request);
       this.addJobService.addJobPosting(this.employerId, this.request ).subscribe(data => {
         this.toastr.success('Job posting created successfully', data.message);
+        this._router.navigate(['employer-job-posting']);
       },
       (error) => {
         this.toastr.error('Create new job posting failed', error.message);
