@@ -63,7 +63,7 @@ export class UpdateJobPostingComponent implements OnInit {
       }
       this.updateJobService.updateJobPosting(this.currentJobId, this.request ).subscribe(data => {
         this.toastr.success('Success' + data);
-        console.log(data)
+        this._router.navigate(['employer-job-posting']);
       },
       (error) => {
         console.error(error.message)
