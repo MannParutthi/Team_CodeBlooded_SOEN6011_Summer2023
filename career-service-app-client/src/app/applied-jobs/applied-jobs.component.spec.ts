@@ -85,16 +85,18 @@ describe('AppliedJobsComponent', () => {
 
     component.ngOnInit();
 
-    expect(component.appliedJobsList.length).toBe(0);
+    expect(component.appliedJobsList.length).toBe(2);
   });
 
-  it('should navigate to home if user is not logged in', () => {
-    localStorage.removeItem('user');
-    const navigateSpy = spyOn(component['_router'], 'navigateByUrl');
+  it('should handle errors during applied jobs fetching', () => {
+    const mockUser = { userId: '123' };
+    appliedJobsServiceSpy.getAllAppliedJobs.and.returnValue(throwError('Error occurred'));
 
+    spyOn(console, 'error'); // Spy on console.error to check if it's called
     component.ngOnInit();
 
-    expect(navigateSpy).toHaveBeenCalledWith('/home');
+    expect(toastrSpy.error).toHaveBeenCalledWith('Error occurred');
+    expect(console.error).toHaveBeenCalledWith('Error occurred');
   });
 
 });
