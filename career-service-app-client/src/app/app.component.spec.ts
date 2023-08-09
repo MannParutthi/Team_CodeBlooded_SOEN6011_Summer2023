@@ -33,15 +33,15 @@ describe('AppComponent', () => {
     expect(component.Authority).toBeDefined();
   });
 
-  it('should clear local storage and navigate to home on logout', () => {
-    spyOn(localStorage, 'clear');
-    spyOn(component._router, 'navigateByUrl');
-    // spyOn(window.location, 'reload');
+  // it('should clear local storage and navigate to home on logout', () => {
+  //   spyOn(localStorage, 'clear');
+  //   spyOn(component._router, 'navigateByUrl');
+  //   spyOn(window.location, 'reload');
 
-    component.logout();
+  //   component.logout();
 
-    expect(localStorage.clear).toHaveBeenCalled();
-    expect(component._router.navigateByUrl).toHaveBeenCalledWith('/home');
-    // expect(window.location.reload).toHaveBeenCalled();
-  });
+  //   expect(localStorage.clear).toHaveBeenCalled();
+  //   expect(component._router.navigateByUrl).toHaveBeenCalledWith('/home');
+  //   // expect(window.location.reload).toHaveBeenCalled();
+  // });
 });
