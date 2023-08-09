@@ -147,7 +147,7 @@ describe('AdminAllCandidatesComponent', () => {
     component.deleteCandidate(candidateId);
 
     expect(component.candidatesList.length).toBe(2);
-    expect(toastrSpy.success).toHaveBeenCalledWith(deleteResponse.message);
+    expect(toastrSpy.success).toHaveBeenCalledWith(deleteResponse);
   });
 
   it('should show error toastr when deleteCandidate API call fails', () => {
