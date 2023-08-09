@@ -78,7 +78,4 @@ describe('AppliedJobsComponent', () => {
 
     expect(navigateSpy).toHaveBeenCalledWith('/home');
 });
-
-
-
 });

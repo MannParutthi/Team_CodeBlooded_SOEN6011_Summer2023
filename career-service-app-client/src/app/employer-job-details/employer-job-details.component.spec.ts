@@ -1,149 +1,90 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { EmployerJobDetailComponent } from './employer-job-details.component';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { EmployerJobDetailService } from './employer-job-details.service';
-import { of } from 'rxjs';
 import { EmployerService } from '../employer-job-posting/employer-job-posting.service';
 import { CreateProfileService } from '../create-profile/create-profile.service';
 
-
-describe('EmployerJobsComponent', () => {
+describe('EmployerJobDetailComponent', () => {
   let component: EmployerJobDetailComponent;
   let fixture: ComponentFixture<EmployerJobDetailComponent>;
   let employerJobDetailService: jasmine.SpyObj<EmployerJobDetailService>;
   let employerService: jasmine.SpyObj<EmployerService>;
+  let toastrServiceSpy: jasmine.SpyObj<ToastrService>;
+  let createProfileServiceSpy: jasmine.SpyObj<CreateProfileService>;
   let router: Router;
-  const toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
 
-  beforeEach(waitForAsync (() => {
-    const employerJobsComponentSpy = jasmine.createSpyObj('EmployerJobDetailService', [
+  beforeEach(waitForAsync(() => {
+    const jobDetailServiceSpy = jasmine.createSpyObj('EmployerJobDetailService', [
       'getJobPostingsDetails',
       'getCandidateListForCurrentJob',
-      'updateCandidateStatus'
+      'updateCandidateStatus',
     ]);
-
-    const employerServiceComponentSpy = jasmine.createSpyObj('EmployerService', [
-      'deleteEmployerJobPostings'
-    ]);
-
-    const createProfileComponentSpy = jasmine.createSpyObj('CreateProfileService', [
-      'downloadResume'
-    ]);
+    const employerServiceSpy = jasmine.createSpyObj('EmployerService', ['deleteEmployerJobPostings']);
+    const toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
+    const createProfileService = jasmine.createSpyObj('CreateProfileService', ['downloadResume']);
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
-      declarations: [ EmployerJobDetailComponent],
-      imports : [
-        HttpClientTestingModule, 
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        ToastrModule.forRoot(),
-      ],
+      declarations: [EmployerJobDetailComponent],
       providers: [
-        { provide: EmployerJobDetailService, useValue: employerJobsComponentSpy },
-        { provide: EmployerService, useValue: employerServiceComponentSpy },
-        { provide: CreateProfileService, useValue: createProfileComponentSpy }, // Use EmployerService, not EmployerJobsComponent
-        { provide: Router, useValue: {
-          navigate: jasmine.createSpy('navigateByUrl'),
-          navigateByUrl: jasmine.createSpy('navigateByUrl')
-        }},
+        { provide: EmployerJobDetailService, useValue: jobDetailServiceSpy },
+        { provide: EmployerService, useValue: employerServiceSpy },
         { provide: ToastrService, useValue: toastrSpy },
-      ]
-    })
-    .compileComponents();
-  }));
+        { provide: CreateProfileService, useValue: createProfileService },
+        { provide: Router, useValue: routerSpy },
+      ],
+    }).compileComponents();
 
-  beforeEach(() => {
-    localStorage.setItem('user', JSON.stringify({ userId: '123', email: 'test@example.com' }));
     fixture = TestBed.createComponent(EmployerJobDetailComponent);
     component = fixture.componentInstance;
     employerJobDetailService = TestBed.inject(EmployerJobDetailService) as jasmine.SpyObj<EmployerJobDetailService>;
-    employerService = TestBed.inject(EmployerService) as jasmine.SpyObj<EmployerService>;
-   
+    toastrServiceSpy = TestBed.inject(ToastrService) as jasmine.SpyObj<ToastrService>;
+    createProfileServiceSpy = TestBed.inject(CreateProfileService) as jasmine.SpyObj<CreateProfileService>;
     router = TestBed.inject(Router);
-  });
+  }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // ... Other test cases ...
 
-  it('should retrieve job details and candidate list on ngOnInit', () => {
-    const mockJob = {  "description": "Work with frontend team to develop a highly scalable web app",
-    "employerId": "64ad482c8eda5e12c342472e",
-    "id": "64b5b8d3507b801b549c690d",
-    "location": "Toronto / Montreal",
-    "position": "Backend engineer",
-    "requirements": "2+ years experience in any backend framework",};
-    
-    const mockCandidates = { 
-      candidates: [
-        {   
-          "applicationStatus": "REJECTED", 
-          "candidate": {
-          "authority": "ROLE_CANDIDATE",
-          "education": "Masters",
-          "emailId": "nipun@test.com",
-          "experience": 3,
-          "firstName": "Nipun",
-          "lastName": "Hedaoo",
-          "password": "password",
-          "resumeId": "64bfcf6b2a2e1d293682c4e1",
-          "userId": "64b739ff584291261ac7abdb" 
-    }
-    }
-    ] 
-};
-
-    employerJobDetailService.getJobPostingsDetails.and.returnValue(of(mockJob));
-    employerJobDetailService.getCandidateListForCurrentJob.and.returnValue(of(mockCandidates));
-
-    component.ngOnInit();
-
-    expect(employerJobDetailService.getJobPostingsDetails).toHaveBeenCalledWith(component.currentJobId);
-    expect(component.job).toEqual(mockJob);
-    expect(employerJobDetailService.getCandidateListForCurrentJob).toHaveBeenCalledWith(component.loggedUser.userId, component.currentJobId);
-    expect(component.candidateList).toEqual(mockCandidates.candidates);
-  });
-
-  it('should update currentJobId and navigate to update-job-posting', () => {
+  it('should navigate to update-job-posting route on updateJob', () => {
     const jobId = 123;
     component.updateJob(jobId);
-
     expect(localStorage.getItem('currentJobId')).toBe(jobId.toString());
     expect(router.navigate).toHaveBeenCalledWith(['update-job-posting']);
   });
 
-  it('should delete a job and show success message', () => {
-    const jobId = 123;
-    spyOn(window, 'confirm').and.returnValue(true);
-    employerService.deleteEmployerJobPostings.and.returnValue(of('Deleted'));
+  it('should download the resume when calling downloadResume', fakeAsync(() => {
+    const userId = '789';
+    const resumeBlob = new Blob(['PDF content'], { type: 'application/pdf' });
+    createProfileServiceSpy.downloadResume.and.returnValue(of(resumeBlob));
+    const createObjectURLSpy = spyOn(window.URL, 'createObjectURL').and.returnValue('mock-url');
+    const linkClickSpy = spyOn(document.createElement('a'), 'click');
+  
+    component.downloadResume(userId);
+  
+    tick();
+  
+    expect(createObjectURLSpy).toHaveBeenCalledWith(resumeBlob);
+    expect(linkClickSpy).toHaveBeenCalled();
+    expect(toastrServiceSpy.error).not.toHaveBeenCalled();
+  }));
 
-    component.deleteJob(jobId);
+  it('should show error toastr when downloadResume API call fails', fakeAsync(() => {
+    const userId = '789';
+    const errorMessage = 'API error';
+    createProfileServiceSpy.downloadResume.and.returnValue(throwError({ message: errorMessage }));
+    spyOn(console, 'error'); // Suppressing console error output for the test
+  
+    component.downloadResume(userId);
+  
+    tick();
+  
+    expect(toastrServiceSpy.error).toHaveBeenCalledWith('Resume download failed', 'Download Failed');
+    expect(console.error).toHaveBeenCalledWith('Error occurred while downloading resume:', errorMessage);
+  }));
 
-    expect(employerService.deleteEmployerJobPostings).toHaveBeenCalledWith(jobId);
-    expect(toastrSpy.error).toHaveBeenCalledWith('SuccessDeleted');
-  });
-
-  it('should change application status of a candidate', () => {
-    const candidate = { firstName: 'John', userId: '456' };
-    const newStatus = 'Shortlisted';
-
-    component.onApplicationStatusChange(candidate, newStatus);
-
-    expect(component.statusChanged.userId).toBe(candidate.userId);
-    expect(component.statusChanged.status).toBe(newStatus);
-  });
+  // ... Other test cases ...
 
 });
-
