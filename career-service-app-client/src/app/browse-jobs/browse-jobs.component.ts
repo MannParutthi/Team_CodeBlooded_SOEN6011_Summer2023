@@ -18,6 +18,7 @@ export class BrowseJobsComponent implements OnInit {
     searchKeyword: [''],
     filterAttribute: ['position'],
   });
+  
   allJobsListOriginal: any[] = [];
   allJobsList: Array<Job> = []
 

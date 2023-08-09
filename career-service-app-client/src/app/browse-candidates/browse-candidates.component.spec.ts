@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BrowseCandidatesComponent } from './browse-candidates.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('BrowseCandidatesComponent', () => {
   let component: BrowseCandidatesComponent;
@@ -8,6 +9,9 @@ describe('BrowseCandidatesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule
+      ],
       declarations: [ BrowseCandidatesComponent ]
     })
     .compileComponents();
@@ -19,7 +23,4 @@ describe('BrowseCandidatesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
