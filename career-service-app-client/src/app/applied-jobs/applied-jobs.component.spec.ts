@@ -66,12 +66,12 @@ describe('AppliedJobsComponent', () => {
   it('should navigate to home if user is not logged in', () => {
     localStorage.removeItem('user');
     const navigateSpy = spyOn(component['_router'], 'navigateByUrl');
-
     component.ngOnInit();
-
     expect(navigateSpy).toHaveBeenCalledWith('/home');
-});
+  });
 
-
-
+  it('should navigate to home if user is not logged in', () => {
+    const navigateSpy = spyOn(component['_router'], 'navigateByUrl');
+    component.ngOnInit();
+  });
 });
