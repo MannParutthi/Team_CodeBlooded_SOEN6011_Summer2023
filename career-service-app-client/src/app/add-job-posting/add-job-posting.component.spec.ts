@@ -1,95 +1,108 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { of, throwError } from 'rxjs';
 import { AddJobPostingComponent } from './add-job-posting.component';
 import { AddJobService } from './add-job-posting.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { EmployerJobDetailService } from '../employer-job-details/employer-job-details.service';
 
 describe('AddJobPostingComponent', () => {
   let component: AddJobPostingComponent;
   let fixture: ComponentFixture<AddJobPostingComponent>;
   let addJobServiceSpy: jasmine.SpyObj<AddJobService>;
   let routerSpy: jasmine.SpyObj<Router>;
-  let toastrSpy: jasmine.SpyObj<ToastrService>;
+  let employerJobDetailServiceSpy: jasmine.SpyObj<EmployerJobDetailService>;
+  const toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
 
-  beforeEach(() => {
-    addJobServiceSpy = jasmine.createSpyObj('AddJobService', ['addJobPosting']);
-    routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
+  beforeEach(waitForAsync(() => {
+    const addJobServiceSpy = jasmine.createSpyObj('AddJobService', ['addJobPosting']);
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const employerJobDetailServiceSpy = jasmine.createSpyObj('EmployerJobDetailService', ['getJobPostingsDetails']);
 
     TestBed.configureTestingModule({
       declarations: [AddJobPostingComponent],
-      imports: [ReactiveFormsModule,
-        HttpClientTestingModule, RouterTestingModule, ToastrModule.forRoot()
-      ],
+      imports: [ReactiveFormsModule, ToastrModule.forRoot()],
       providers: [
         { provide: AddJobService, useValue: addJobServiceSpy },
         { provide: Router, useValue: routerSpy },
+        { provide: EmployerJobDetailService, useValue: employerJobDetailServiceSpy },
         { provide: ToastrService, useValue: toastrSpy },
       ],
     }).compileComponents();
+  }));
 
+  beforeEach(() => {
+    localStorage.setItem('user', JSON.stringify({ userId: '123' }));
     fixture = TestBed.createComponent(AddJobPostingComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    addJobServiceSpy = TestBed.inject(AddJobService) as jasmine.SpyObj<AddJobService>;
+    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    employerJobDetailServiceSpy = TestBed.inject(EmployerJobDetailService) as jasmine.SpyObj<EmployerJobDetailService>;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should submit valid form', () => {
-    // Set up mock values and return values
-    const mockFormValue = {
-      position: 'Software Developer',
-      location: 'New York',
-      description: 'Job description',
-      requirements: 'Job requirements',
-    };
-    component.jobPostingForm.setValue(mockFormValue);
-    addJobServiceSpy.addJobPosting.and.returnValue(of({ message: 'Job posted successfully' }));
+  it('should navigate to /home if user is not logged in', () => {
+    localStorage.removeItem('user');
 
-    // Call the onSubmit function
-    component.onSubmit();
+    component.ngOnInit();
 
-    // Expectations
-    expect(addJobServiceSpy.addJobPosting).toHaveBeenCalledWith(component.employerId, jasmine.objectContaining(mockFormValue));
-    expect(toastrSpy.success).toHaveBeenCalledWith('Job posting created successfully', 'Job posted successfully');
-    // expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('employer-job-posting');
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/home']);
   });
 
-  it('should handle form submission failure', () => {
-    // Set up mock values and return an error
+  it('should call addJobPosting and navigate to employer-job-posting on successful form submission', () => {
     const mockFormValue = {
-      position: 'Software Developer',
-      location: 'New York',
-      description: 'Job description',
-      requirements: 'Job requirements',
+      "description": "Work with frontend team to develop a highly scalable web application",
+      "location": "Toronto / Montreal",
+      "position": "Backend engineer",
+      "requirements": "2+ years experience in any backend framework, Java/Python preferred"
     };
-    component.jobPostingForm.setValue(mockFormValue);
-    const errorMessage = 'Job posting creation failed';
-    addJobServiceSpy.addJobPosting.and.returnValue(throwError({ message: errorMessage }));
+    const mockResponse = { message: 'Job posting created successfully' };
+    addJobServiceSpy.addJobPosting.and.returnValue(of(mockResponse));
 
-    // Call the onSubmit function
+    component.jobPostingForm.setValue(mockFormValue);
     component.onSubmit();
 
-    // Expectations
-    expect(addJobServiceSpy.addJobPosting).toHaveBeenCalledWith(component.employerId, jasmine.objectContaining(mockFormValue));
+    expect(addJobServiceSpy.addJobPosting).toHaveBeenCalledWith('123', {
+      ...mockFormValue,
+      employerId: '123',
+    });
+    expect(toastrSpy.success).toHaveBeenCalledWith('Job posting created successfully', mockResponse.message);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['employer-job-posting']);
+  });
+
+  it('should show error toastr when addJobPosting API call fails', () => {
+    const mockFormValue = {
+      "description": "Work with frontend team to develop a highly scalable web application",
+      "location": "Toronto / Montreal",
+      "position": "Backend engineer",
+      "requirements": "2+ years experience in any backend framework, Java/Python preferred"
+    };
+    const errorMessage = 'API error';
+    addJobServiceSpy.addJobPosting.and.returnValue(throwError({ message: errorMessage }));
+
+    component.jobPostingForm.setValue(mockFormValue);
+    component.onSubmit();
+
     expect(toastrSpy.error).toHaveBeenCalledWith('Create new job posting failed', errorMessage);
   });
 
-  it('should not submit invalid form', () => {
-    // Call the onSubmit function without setting form values
+  it('should not call addJobPosting when the form is invalid', () => {
+    const mockFormValue = {
+      "description": "Work with frontend team to develop a highly scalable web application",
+      "location": "Toronto / Montreal",
+      "position": "Backend engineer",
+      "requirements": "2+ years experience in any backend framework, Java/Python preferred"
+    };
 
-    // Call the onSubmit function
+    component.jobPostingForm.setValue(mockFormValue);
     component.onSubmit();
 
-    // Expectations
     expect(addJobServiceSpy.addJobPosting).not.toHaveBeenCalled();
-    expect(toastrSpy.success).not.toHaveBeenCalled();
-    expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();
   });
 });
+
+
