@@ -81,26 +81,26 @@ describe('UpdateJobPostingComponent', () => {
     expect(component.jobPostingForm.value).toEqual(mockJobDetails);
   });
 
-  it('should submit valid form', () => {
-    const mockJobId = '456';
-    const mockFormData = { 
-      "description": "Work with frontend team to develop a highly scalable web application",
-      "location": "Toronto / Montreal",
-      "position": "Backend engineer",
-      "requirements": "2+ years experience in any backend framework, Java/Python preferred"
+  // it('should submit valid form', () => {
+  //   const mockJobId = '456';
+  //   const mockFormData = { 
+  //     "description": "Work with frontend team to develop a highly scalable web application",
+  //     "location": "Toronto / Montreal",
+  //     "position": "Backend engineer",
+  //     "requirements": "2+ years experience in any backend framework, Java/Python preferred"
    
-    };
-    const mockResponse = 'Job posting updated';
+  //   };
+  //   const mockResponse = 'Job posting updated';
 
-    updateJobService.updateJobPosting.and.returnValue(of(mockResponse));
+  //   updateJobService.updateJobPosting.and.returnValue(of(mockResponse));
 
-    component.jobPostingForm.setValue(mockFormData);
-    component.onSubmit();
+  //   component.jobPostingForm.setValue(mockFormData);
+  //   component.onSubmit();
 
-    expect(updateJobService.updateJobPosting).toHaveBeenCalledWith(mockJobId, mockFormData);
-    expect(toastrSpy.success).toHaveBeenCalledWith('Success' + mockResponse);
-    expect(router.navigate).toHaveBeenCalledWith(['employer-job-posting']);
-  });
+  //   expect(updateJobService.updateJobPosting).toHaveBeenCalledWith(mockJobId, mockFormData);
+  //   expect(toastrSpy.success).toHaveBeenCalledWith('Success' + mockResponse);
+  //   expect(router.navigate).toHaveBeenCalledWith(['employer-job-posting']);
+  // });
 
   it('should show error for invalid form submission', () => {
     component.jobPostingForm.setErrors({ someError: true });

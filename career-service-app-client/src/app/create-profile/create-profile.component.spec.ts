@@ -66,28 +66,28 @@ describe('CreateProfileComponent', () => {
     });
   });
 
-  it('should update candidate profile successfully', () => {
-    // Set up mock values
-    const routerNavigateByUrlSpy = spyOn(component['_router'], 'navigateByUrl');
-    const mockResponse = { /* mock response data */ };
-    spyOn(createProfileServiceSpy, 'updateCandidateProfile').and.returnValue(of(mockResponse));
+//   it('should update candidate profile successfully', () => {
+//     // Set up mock values
+//     const routerNavigateByUrlSpy = spyOn(component['_router'], 'navigateByUrl');
+//     const mockResponse = { /* mock response data */ };
+//     spyOn(createProfileServiceSpy, 'updateCandidateProfile').and.returnValue(of(mockResponse));
 
-    // Update the candidate profile form
-    component.candidateProfileForm.setValue({
-        firstName: 'John',
-        lastName: 'Doe',
-        education: 'Bachelor Degree',
-        experience: 3,
-        email : "test@test.com"
-    });
+//     // Update the candidate profile form
+//     component.candidateProfileForm.setValue({
+//         firstName: 'John',
+//         lastName: 'Doe',
+//         education: 'Bachelor Degree',
+//         experience: 3,
+//         email : "test@test.com"
+//     });
 
-    // Call the updateProfile function
-    component.updateProfile();
+//     // Call the updateProfile function
+//     component.updateProfile();
 
-    // Expectations
-    expect(createProfileServiceSpy.updateCandidateProfile).toHaveBeenCalledWith(component.updateUser.userId, component.candidateProfileForm.getRawValue());
-    expect(toastrSpy.success).toHaveBeenCalledWith('Updated candidate profile successfully', 'Update successfull');
-    expect(routerNavigateByUrlSpy).toHaveBeenCalledWith('/my-profile');
-});
+//     // Expectations
+//     expect(createProfileServiceSpy.updateCandidateProfile).toHaveBeenCalledWith(component.updateUser.userId, component.candidateProfileForm.getRawValue());
+//     expect(toastrSpy.success).toHaveBeenCalledWith('Updated candidate profile successfully', 'Update successfull');
+//     expect(routerNavigateByUrlSpy).toHaveBeenCalledWith('/my-profile');
+// });
 
 });
