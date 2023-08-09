@@ -50,7 +50,7 @@ describe('AdminAllCandidatesService', () => {
 
   it('should delete a candidate', () => {
     const candidateId = 1;
-    const mockResponse = { message: 'Candidate deleted successfully' };
+    const mockResponse = '{ "message": "Candidate deleted successfully" }';
 
     service.deleteCandidate(candidateId).subscribe((data) => {
       expect(data).toEqual(mockResponse);
